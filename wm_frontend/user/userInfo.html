@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/userInfo.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+    <title>用户中心</title>
+</head>
+
+<body>
+    <nav class="header" id="header"></nav>
+    <div class="wrapper blockimportant">
+        <div class="wrap">
+            <div class="layout bugfix_ie6 dis_none">
+                <div class="n-logo-area clearfix">
+                    <a class="fl-l">
+                        <img src="/img/wm-icon.jpg" style="width: 50px; height: 50px;">
+                    </a>
+                    <a id="logoutLink" class="fl-r logout" href="user.html" onclick="exit()">退出</a>
+                </div>
+                <!-- 头像、姓名 -->
+                <div class="n-accout-area-box">
+                    <div class="n-account-area clearfix" id="userNameImg">
+
+                    </div>
+                </div>
+            </div>
+            <div class="layout">
+                <div class="n-main-nav clearfix">
+                    <ul class="c_b">
+                        <!-- <li class="current">
+                            <a href="#" title="账号安全" data-ation="security">账号安全</a>
+                            <em class="n-nav-corner"></em>
+                        </li> -->
+                        <li class="current">
+                            <a href="#" title="个人信息" data-ation="profile">个人信息</a>
+                            <em class="n-nav-corner"></em>
+                        </li>
+                    </ul>
+                </div>
+                <div class="n-frame">
+                    <div class="uinfo c_b">
+                        <div id="userdetail">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer" id="footer"></div>
+    <div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">修改个人信息</h4>
+                </div>
+                <div class="modal-body" id="userInfoUpdate">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="btUpdate">修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <!--初始化页面信息-->
+    <script>
+        $(window).load(function () {
+
+            $('#header').load('/../header.html')
+            $('#footer').load('/../footer.html')
+
+            let uid = sessionStorage.getItem('uid')
+            $.ajax({
+                method: 'GET',
+                url: 'http://127.0.0.1:5050/user',
+                data: `uid=${uid}`,
+                success: function (data) {
+                    console.log('成功获取到服务器异步返回的数据：', data)
+                    //获取用户信息
+                    let htmluserName_img = `
+                        <div class="na-info">
+                            <p class="na-name" style="color:#999;font-weight:normal">${data.uname}</p>
+                            <p class="na-num">663629110</p>
+                        </div>
+                        <div class="na-img-area fl-l">
+                            <img class="na-img-bg-area" src="${data.avatar}"></img>
+                        </div>
+                    `
+                    $('#userNameImg').html(htmluserName_img)
+
+                    let htmluserdetail = `
+                    <div class="main_l">
+                                <div class="naInfoImgBox t_c">
+                                    <div class="na-img-area marauto">
+                                        <img class="na-img-bg-area" src="${data.avatar}"></img>
+                                        <em class="na-edit"></em>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="main_r">
+                                <div class="framedatabox">
+                                    <div class="fdata">
+                                        <button class="fr btn-lg" data-toggle="modal" data-target="#UpdateModal" data-whatever="@mdo">
+                                            <i class="iconpencil"></i>
+                                            编辑
+                                        </button>
+                                        
+                                        <h3>基础资料</h3>
+                                    </div>
+                                    <div class="fdata lblnickname">
+                                        <p>
+                                            <span>昵称：</span>
+                                            <span class="value" -empty>
+                                                <span style="color: #999;">${data.uname}</span>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="fdata lblnickname">
+                                        <p>
+                                            <span>真实姓名：</span>
+                                            <span class="value" -empty>
+                                                <span style="color: #999;">${data.user_name}</span>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="fdata lblgender">
+                                        <p>
+                                            <span>性别：</span>
+                                            <span class="value" _empty val>${data.gender ? '男' : '女'}</span>
+                                        </p>
+                                    </div>
+                                    <div class="btn_editinfo">
+                                        <a id="editInfoWap" class="btnadpt bg_normal" href>编辑基础资料</a>
+                                    </div>
+                                    <div class="fdata lblnickname">
+                                        <p>
+                                            <span>电子邮箱</span>
+                                            <span class="value" -empty>
+                                                <span style="color: #999;">${data.email}</span>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="fdata lblnickname">
+                                        <p>
+                                            <span>电话</span>
+                                            <span class="value" -empty>
+                                                <span style="color: #999;">${data.phone}</span>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="fdata click-row">
+                                        <p>
+                                            <span>账户地区</span>
+                                            <span class="box_center">
+                                                <em id="region" _code="CN">中国</em>
+                                                <i class="arrow_r hidewap"></i>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                    `
+                    $('#userdetail').html(htmluserdetail)
+
+                    let htmluserUpdate = `
+                    <form>
+                        <div class="form-group">
+                            <label for="uname" class="control-label">昵称：</label>
+                            <input type="text" class="form-control" id="uname" value=${data.uname}></input>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_name" class="control-label">真实姓名:</label>
+                            <input class="form-control" id="user_name" value=${data.user_name}></input>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="control-label">电子邮箱:</label>
+                            <input class="form-control" id="email" value=${data.email}></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="control-label">电话:</label>
+                            <input class="form-control" id="phone" value=${data.phone}></input>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender" class="control-label">性别:</label>
+                            <input class="form-control" id="gender" value=${data.gender ? '男' : '女'}></input>
+                        </div>
+                    </form>
+                    `
+                    $('#userInfoUpdate').html(htmluserUpdate)
+                }
+            })
+        })
+
+        $('#btUpdate').click(function () {
+            //读取所有的表单输入
+            let uid = sessionStorage.getItem('uid')
+            let uname = $('#uname').val()
+            let user_name = $('#user_name').val()
+            let email = $('#email').val()
+            let phone = $('#phone').val()
+            let gender = $('#gender').val() == '男' ? 1 : 0
+            //验证表单输入的合法性
+
+            //异步提交用户的输入给后台API
+            $.ajax({
+                method: 'POST',
+                url: 'http://127.0.0.1:5050/user/update',
+                data: `uid=${uid}&uname=${uname}&user_name=${user_name}&email=${email}&phone=${phone}&gender=${gender}`,
+                success: function (data, msg, xhr) {
+                    console.log('异步请求注册API成功：' + data)
+                    if (data.code == 200) {
+                        //更新成功
+                        $('#modalUpdateSucc').modal()
+                    } else {
+                        //更新失败，服务器返回错误消息+data.msg
+                        $('#serverErrMsg').html(data.msg)
+                        $('#modalRegisterFail').modal()
+                    }
+                },
+                error: function (xhr, error) {
+                    console.log("异步请求注册API失败：")
+                    console.log(xhr)
+                    console.log(error)
+                }
+            })
+        })
+
+        function exit() {
+
+            window.opener = null;
+
+            window.open("", "_self");
+
+            window.close();
+        }
+    </script>
+    <script src="/js/header.js"></script>
+    <!--弹出式对话框：表示更新成功-->
+    <div id="modalUpdateSucc" class="modal fade">
+        <!--半透明遮罩-->
+        <div class="modal-dialog modal-sm">
+            <!--对话框尺寸、位置-->
+            <div class="modal-content">
+                <!--边框、倒角、背景色-->
+                <!--头部-->
+                <div class="modal-header">
+                    <h4 class="modal-title">更新成功</h4>
+                </div>
+                <!--主体-->
+                <div class="modal-body">
+                    <p>用户更新成功！</p>
+                </div>
+                <!--尾部-->
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal">确定</button>
+                    <!-- $('[data-dismiss="modal"]').click(function(){})-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--弹出式对话框：表示更新失败-->
+    <div id="modalUpdateFail" class="modal fade">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <!--头部-->
+                <div class="modal-header">
+                    <h4 class="modal-title">更新失败</h4>
+                </div>
+                <!--主体-->
+                <div class="modal-body">
+                    <p><b>用户更新失败！</b></p>
+                    <p>服务器返回的错误消息：<span id="serverErrMsg"></span></p>
+                </div>
+                <!--尾部-->
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--编辑个人信息资料-->
+</body>
+
+</html>

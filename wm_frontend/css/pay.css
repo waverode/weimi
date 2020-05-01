@@ -1,0 +1,219 @@
+/* 页头 */
+.wm-pay-header{
+    background: #ffff;
+    border-bottom: 3px solid #ff6700;
+}
+.header-logo{
+    margin: 30px 0 20px 40px;
+    /* padding-top: 9px; */
+    text-align: right;
+}
+.header-title{
+    margin: 40px 0 20px;
+    padding-bottom: 9px;
+}
+.subtitle{
+    font-size: 42%;
+}
+.header-info{
+    margin: 40px 0 20px;
+}
+@media screen and (max-width: 992px) {  /* 针对手机调整页头 */
+    .header-title{
+        text-align: center;
+    }
+    .subtitle{
+        font-size: 0%;
+    }
+}
+/* 主体 */
+.wm-pay-main{
+    margin-top: 40px;
+    background: #fff;
+}
+.wm-pay-box{
+    padding: 28px 48px 0 48px;
+}
+.title{
+    font-size: 18px;
+    color: #333333;
+    line-height: 20px;
+    font-weight: normal;
+    margin: 0;
+    padding-top: 20px;
+    padding-bottom: 12px;
+    /* border-bottom: 1px solid #e0e0e0; */
+}
+/* 地址 */
+.row-address h3{
+    margin: 0;
+}
+.row-address .add-address{
+    color: #fc8332;
+    padding-top: 26px;
+    padding-bottom: 18px;
+    border-top: 1px solid #e0e0e0; 
+}
+/* 商品 */
+.row-goods{
+    margin-top: 43px;
+}
+.row-good-info{
+    height: 80px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 9px;
+    /* line-height: 80px; */
+    /* margin-left: 15px;
+    margin-right: 15px;  */
+}
+.row-good-info img{
+    height: 80px;
+}
+@media screen and (max-width: 992px) {
+    .row-good-info .row-xs-hidden .box-font{   /* 针对平板屏以下商品价格的样式调整 */
+        line-height: 38px;
+    }
+}
+.item-row{
+    margin-bottom:18px
+}
+.goods-name{
+    line-height: inherit;
+    margin: 0;
+    overflow: hidden;           /* 属性规定内容溢出元素框时的处理。hidden表示溢出内容会被修剪，且剪掉部分不可见 */
+    white-space: nowrap;        /* 属性规定如何处理元素内的空白。nowrap规定文本不能换行，在同一行继续直至遇到<br> */
+    text-overflow: ellipsis;    /* 属性规定文本溢出包含元素时的处理。ellipsis表示省略号代替修建部分，clip表示直接修剪 */
+}
+.box-font{
+    font-size: 15px;
+    line-height: 80px;
+    margin: 0;
+    color: #333333;
+}
+.total-price{
+    color: #ff6700;
+}
+/* 运费 */
+.passwork-kind{
+    text-align: left;
+    color: #ff6700;
+}
+.invoice-info{
+    color: #ff6700;
+}
+.invoice-info span{
+    margin-right: 18px;
+}
+.invoice-info a{
+    font-size: 14px;
+    margin-left: 15px;
+    color: #666666;
+}
+.invoice-info a:hover, .invoice-info a:focus{
+    color: #313131;
+    transition: color .3s;
+    text-decoration: none;
+}
+.coupon-info .box-font{
+    font-size: 15px;
+    line-height: 80px;
+    margin: 0;
+}
+.coupon-info a{
+    color: #666666;
+}
+.coupon-info a:hover, .coupon-info a:focus{
+    color: #313131;
+    transition: color .3s;
+    text-decoration: none;
+}
+.passwork-title, .coupon-title, .invoice-title{
+    font-size: 18px;
+}
+.row-cell{
+    margin-top: 13px;
+    margin-bottom: 9px;
+    border-top: 1px solid #e0e0e0;
+}
+@media screen and (max-width: 768px) {
+    .box-font{
+        font-size: 14px
+    }
+    .passwork-title, .coupon-title, .invoice-title{
+        font-size: 16px;
+    }
+    .invoice-info span{
+        margin-right: 14px;
+    }
+    .invoice-info a{
+        margin-left: 11px;
+    }
+}
+/* 统计栏 */
+.row-statistics{
+    margin-top: 18px;
+    /* margin-bottom: 22px; */
+    text-align: right;
+    height: 160px;
+}
+.row-statistics .statistics-box{
+    position: absolute;
+    right: 15px;
+    bottom: 20;
+}
+.row-statistics .statistics-box li{
+    display: block;
+    padding-left: 126px;
+    line-height: 2;
+    position: relative;
+}
+.row-statistics .statistics-box label{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 126px;
+    font-weight: 600;
+    white-space: nowrap;
+    zoom: 1;
+}
+.row-statistics .statistics-box .val{
+    color: #ff6700;
+    zoom: 1;
+}
+.row-statistics .statistics-box i, .row-statistics .statistics-box em{
+    font-style: normal;
+}
+.row-statistics .statistics-box em{
+    font-size: 23px;
+    line-height: 1;
+}
+/* 工具栏 */
+.section-bar{
+    background: #fff;
+    margin-top: 3px;
+    margin-bottom: 550px;
+}
+.section-bar .btn{
+    width: 158px;
+    line-height: 38px;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    display: inline-block;
+    margin: 12px 0 10px;
+    padding: 0;
+    border-radius: 0;
+}
+.section-bar .btn-return{
+    border: 1px solid #b0b0b0;
+    color: #7e7e7e;
+}
+.section-bar .btn-pay{
+    color: #fff;
+    background: #ff6700;
+    border: 1px solid #ff6700;
+}
+.section-bar .btn-pay:hover{
+    background: #e75d00;
+    transition: color .3s;
+}

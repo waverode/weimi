@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/base.min.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+    <title>用户中心</title>
+</head>
+
+<body>
+    <!--导航栏1-->
+    <!--导航栏2-->
+    <nav class="header" id="header"></nav>
+
+    <!--页面选项卡-->
+    <div class="breadcrumbs">
+        <div class="container">
+            <a>首页</a>
+            <span class="sep">></span>
+            <span>个人中心</span>
+        </div>
+    </div>
+
+    <div class="page-main user-main">
+        <div class="container">
+            <div class="row">
+                <!--左侧导航栏-->
+                <div class="span4">
+                    <div id="J_userMenu" class="user-address-menu">
+                        <ul class="menu-box">
+                            <ul class="list nav nav-tabs nav-stacked" role="tablist">
+                                <h3 class="title">订单中心</h3>
+                                <li role="presentation">
+                                    <a id="myorder" class="leftmenu-text" href="#order" aria-controls="order" role="tab"
+                                        data-toggle="tab">我的订单</a>
+                                </li>
+                                <h3 class="title">个人中心</h3>
+                                <li role="presentation" class="active">
+                                    <a class="leftmenu-text" href="#user" aria-controls="user" role="tab"
+                                        data-toggle="tab">我的个人中心</a class="leftmenu-text">
+                                </li>
+                                <li role="presentation">
+                                    <a class="leftmenu-text" href="#messages" aria-controls="messages" role="tab"
+                                        data-toggle="tab">消息通知</a class="leftmenu-text">
+                                </li>
+                                <li role="presentation">
+                                    <a class="leftmenu-text" href="#address" aria-controls="address" role="tab"
+                                        data-toggle="tab">收货地址</a class="leftmenu-text">
+                                </li>
+                                <h3 class="title">账户管理</h3>
+                                <li>
+                                    <a class="leftmenu-text" href="userInfo.html">个人信息</a class="leftmenu-text">
+                                </li>
+                                <li>
+                                    <a class="leftmenu-text" data-toggle="modal" data-target="#changePwdModal">修改密码</a
+                                        class="leftmenu-text">
+                                </li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 修改密码的模态框 -->
+                <div class="modal fade" id="changePwdModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="exampleModalLabel">修改密码</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="uname" class="control-label space">原密码：</label>
+                                        <input type="text" class="form-control space" id="oldPwd"
+                                            placeholder="输入原密码"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="user_name" class="control-label space">新密码</label>
+                                        <input class="form-control space" id="newPwd" placeholder="输入新密码"></input>
+                                        <div> </div>
+                                        <input onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"
+                                            class="form-control space" id="repeatPwd" placeholder="重复新密码"></input>
+                                        <div id="newPwdMsg" class="err_tip">密码长度8~16位</div>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label for="email" class="control-label space">验证码</label>
+                                        <input class="form-control space" id="email" placeholder="图片验证码"></textarea>
+                                    </div> -->
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary" id="btChangePwd">修改</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 右侧内容页 -->
+
+                <div class="span16">
+                    <div class="tab-content">
+                        <!--用户订单列表-->
+                        <div role="tabpanel" class="tab-pane" id="order">
+                            <div class="uc-box">
+                                <div class="uc-content-box">
+                                    <div class="box-bd">
+                                        <h3 class="title">
+                                            我的订单
+                                        </h3>
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li role="presentation" class="active">
+                                                <a id="allproduct" href="#all" aria-controls="all" role="tab"
+                                                    data-toggle="tab">
+                                                    所有订单
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a id="unpaid" href="#no-pay" aria-controls="no-pay" role="tab"
+                                                    data-toggle="tab">
+                                                    待支付
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a id="unreceive" href="#no-get" aria-controls="no-get" role="tab"
+                                                    data-toggle="tab">
+                                                    待收货
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a id="recycle-order" href="#finish" aria-controls="finish" role="tab"
+                                                    data-toggle="tab">
+                                                    订单回收站
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                    <div class="box-bd">
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane active" id="all">
+                                                <p class="empty">
+                                                    当前没有交易订单
+                                                </p>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane" id="no-pay">
+                                                <p class="empty">
+                                                    当前没有交易订单
+                                                </p>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane" id="no-get">
+                                                <p class="empty">
+                                                    当前没有交易订单
+                                                </p>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane" id="finish">
+                                                <p class="empty">
+                                                    当前没有交易订单
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--用户信息页-->
+                        <div role="tabpanel" class="tab-pane active" id="user">
+                            <div class="mi-uc-box uc-main-box">
+                                <div class="uc-content-box portal-content-box">
+                                    <div class="box-hd" id="userCard">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--用户消息通知页-->
+                        <div role="tabpanel" class="tab-pane" id="messages">
+                            <div class="mi-uc-box uc-main-box">
+                                <div class="uc-content-box">
+                                    <div class="box-hd">
+                                        <h1 class="title">消息通知</h1>
+                                        <div class="more clearfix">
+                                            <ul class="filter-list J_addrType nav nav-tabs" role="tablist">
+                                                <li role="presentation" class="active">
+                                                    <a id="aAllnews" href="#Allnews" aria-controls="Allnews" role="tab"
+                                                        data-toggle="tab">全部消息</a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a id="aLogisticsnews" href="#logistics" aria-controls="logistics"
+                                                        role="tab" data-toggle="tab">物流消息</a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a id="aSpecialOffersnews" href="#SpecialOffers"
+                                                        aria-controls="SpecialOffers" role="tab"
+                                                        data-toggle="tab">特惠活动</a>
+                                                </li>
+                                            </ul>
+                                            <!-- Tab panes -->
+                                            <div class="tab-content">
+                                                <div role="tabpanel" class="tab-pane active" id="Allnews"></div>
+                                                <div role="tabpanel" class="tab-pane" id="logistics"></div>
+                                                <div role="tabpanel" class="tab-pane" id="SpecialOffers"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--用户地址页-->
+                        <div role="tabpanel" class="tab-pane" id="address">
+                            <div class="mi-uc-box uc-main-box">
+                                <div class="uc-content-box">
+                                    <div class="box-hd">
+                                        <h1 class="title">收货地址</h1>
+                                        <div class="more clearfix">
+                                            <div id="userAddress" class="addresslist-content">
+
+                                            </div>
+                                            <div class="address-footer">
+                                                <button class="btn btaddAddress" data-toggle="modal"
+                                                    data-target="#addAddressModal">新建收货地址</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- 新建收货地址的模态框 -->
+                <div class="modal fade" id="addAddressModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="exampleModalLabel">新建收货地址</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="receiver" class="control-label space">收货人</label>
+                                        <input type="text" class="form-control space" id="receiver"
+                                            placeholder="输入收货人姓名"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone" class="control-label space">手机号码</label>
+                                        <input type="text" class="form-control space" id="phone"
+                                            placeholder="输入收货人手机号码"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="area" class="control-label space">所在地区</label>
+                                        <input type="text" class="form-control space" id="area"
+                                            placeholder="xx省xx市xx区"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address" class="control-label space">详细地址</label>
+                                        <input type="text" class="form-control space" id="addressdetails"
+                                            placeholder="输入详细地址"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address_default">
+                                            <input type="checkbox" id="address_default">将该地址设为默认地址</input>
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary" id="btNewAddress">新建</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer" id="footer">
+
+    </div>
+
+
+
+
+
+    <!--底部-->
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script>
+        /*输入框失去焦点时进行验证*/
+        $('#newPwd').blur(function () {
+            let newPwd = $('#newPwd').val()
+            let repeatPwd = $('#repeatPwd').val()
+            if (newPwd.length < 8) {
+                $('#newPwdMsg').html('密码长度太短了').removeClass('alert-info').addClass('alert-danger')
+            } else if (newPwd.length > 16) {
+                $('#newPwdMsg').html('密码长度太长了').removeClass('alert-info').addClass('alert-danger')
+            } else if (newPwd != repeatPwd) {
+                $('#newPwdMsg').html('新密码不一致').removeClass('alert-info').addClass('alert-danger')
+            } else {
+                $('#newPwdMsg').html('密码长度合法').removeClass('alert-danger').addClass('alert-info')
+            }
+        })
+        $('#repeatPwd').blur(function () {
+            let newPwd = $('#newPwd').val()
+            let repeatPwd = $('#repeatPwd').val()
+            if (newPwd.length < 8) {
+                $('#newPwdMsg').html('密码长度太短了').removeClass('alert-info').addClass('alert-danger')
+            } else if (newPwd.length > 16) {
+                $('#newPwdMsg').html('密码长度太长了').removeClass('alert-info').addClass('alert-danger')
+            } else if (newPwd != repeatPwd) {
+                $('#newPwdMsg').html('新密码不一致').removeClass('alert-info').addClass('alert-danger')
+            } else {
+                $('#newPwdMsg').html('密码长度合法').removeClass('alert-danger').addClass('alert-info')
+            }
+        })
+
+        /**为btChangePwd按钮添加时间监听**/
+        $('#btChangePwd').click(function () {
+            //读取所有的表单输入
+            let uid = sessionStorage.getItem('uid')
+            let upwd = $('#oldPwd').val()
+            let newpwd = $('#newPwd').val()
+            console.log(uid, upwd, newpwd)
+            //验证表单输入的合法性
+            //异步提交用户的输入给后台API
+            $.ajax({
+                method: 'POST',
+                url: 'http://127.0.0.1:5050/user/changePwd',
+                data: `uid=${uid}&upwd=${upwd}&newPwd=${newpwd}`,
+                success: function (data, msg, xhr) {
+                    console.log('异步请求修改密码API成功：' + data)
+                    if (data.code == 200) {
+                        $('#modalChangePwdSucc').modal()
+                    } else {
+                        $('#serverErrMsg').html(data.msg)
+                        $('#modalChangePwdFail').modal()
+                    }
+                },
+                error: function (xhr, error) {
+                    console.log("异步请求修改密码API失败：")
+                    console.log(xhr)
+                    console.log(error)
+                }
+            })
+        })
+
+        /**为btNewAddress按钮添加时间监听**/
+        $('#btNewAddress').click(function () {
+            //读取所有的表单输入
+            let uid = sessionStorage.getItem('uid')
+            let receiver = $('#receiver').val()
+            let phone = $('#phone').val()
+            let area = $('#area').val()
+            let address = $('#addressdetails').val()
+            let address_default = $('#address_default').prop('checked') == true ? 1 : 0
+            console.log(uid, receiver, phone, area, address, address_default)
+            //验证表单输入的合法性
+            //异步提交用户的输入给后台API
+            $.ajax({
+                method: 'POST',
+                url: 'http://127.0.0.1:5050/user/addAddress',
+                data: `uid=${uid}&receiver=${receiver}&phone=${phone}&area=${area}&address=${address}&address_default=${address_default}`,
+                success: function (data, msg, xhr) {
+                    console.log('异步请求新建地址API成功：' + data)
+                    if (data.code == 200) {
+                        $('#modalNewAddressSucc').modal()
+                    } else {
+                        $('#serverErrMsg').html(data.msg)
+                        $('#modalNewAddressFail').modal()
+                    }
+                },
+                error: function (xhr, error) {
+                    console.log("异步请求新建API失败：")
+                    console.log(xhr)
+                    console.log(error)
+                }
+            })
+        })
+
+        /**为aAllnews链接添加时间监听**/
+        $('#aAllnews').click(function () {
+            //读取所有的表单输入
+            let uid = sessionStorage.getItem('uid')
+            console.log(uid)
+            //验证表单输入的合法性
+            //异步提交用户的输入给后台API
+            $.ajax({
+                method: 'GET',
+                url: 'http://127.0.0.1:5050/news',
+                data: `uid=${uid}`,
+                success: function (data, msg, xhr) {
+                    console.log('异步请求消息页面读取API成功：' + data)
+                    let html = ''//即将要展示的消息页面
+                    for (let i in data.newsItems) {
+                        html += `
+                        <div class="news-area">
+                                                        <div class="news-time">
+                                                            ${data.newsItems[i].newTime}
+                                                        </div>
+                                                        <div class="news-detail-area">
+                                                            <div class="news-title">
+                                                                ${data.newsItems[i].newTitle}
+                                                            </div>
+                                                            <div class="news-content">
+                                                                <div class="news-description">
+                                                                    ${data.newsItems[i].newDescription}
+                                                                </div>
+                                                                <div class="news-source">
+                                                                    ${data.newsItems[i].newSource}
+                                                                </div>
+                                                                <img class="news-image"
+                                                                    src=${data.newsItems[i].newImg}>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                        `
+                        $('#Allnews').html(html)
+                    }
+                },
+                error: function (xhr, error) {
+                    console.log("异步请求消息页面读取API失败：")
+                    console.log(xhr)
+                    console.log(error)
+                }
+            })
+        })
+        /**为aLogisticsnews链接添加时间监听**/
+        $('#aLogisticsnews').click(function () {
+            //读取所有的表单输入
+            let uid = sessionStorage.getItem('uid')
+            console.log(uid)
+            //验证表单输入的合法性
+            //异步提交用户的输入给后台API
+            $.ajax({
+                method: 'GET',
+                url: 'http://127.0.0.1:5050/news',
+                data: `uid=${uid}`,
+                success: function (data, msg, xhr) {
+                    console.log('异步请求消息页面读取API成功：' + data)
+                    let html = ''//即将要展示的消息页面
+                    for (let i in data.newsLogisticsItems) {
+                        html += `
+                        <div class="news-area">
+                                                        <div class="news-time">
+                                                            ${data.newsLogisticsItems[i].newTime}
+                                                        </div>
+                                                        <div class="news-detail-area">
+                                                            <div class="news-title">
+                                                                ${data.newsLogisticsItems[i].newTitle}
+                                                            </div>
+                                                            <div class="news-content">
+                                                                <div class="news-description">
+                                                                    ${data.newsLogisticsItems[i].newDescription}
+                                                                </div>
+                                                                <div class="news-source">
+                                                                    ${data.newsLogisticsItems[i].newSource}
+                                                                </div>
+                                                                <img class="news-image"
+                                                                    src=${data.newsLogisticsItems[i].newImg}>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                        `
+                        $('#logistics').html(html)
+                    }
+                },
+                error: function (xhr, error) {
+                    console.log("异步请求消息页面读取API失败：")
+                    console.log(xhr)
+                    console.log(error)
+                }
+            })
+        })
+        /**为aSpecialOffersnews链接添加时间监听**/
+        $('#aSpecialOffersnews').click(function () {
+            //读取所有的表单输入
+            let uid = sessionStorage.getItem('uid')
+            console.log(uid)
+            //验证表单输入的合法性
+            //异步提交用户的输入给后台API
+            $.ajax({
+                method: 'GET',
+                url: 'http://127.0.0.1:5050/news',
+                data: `uid=${uid}`,
+                success: function (data, msg, xhr) {
+                    console.log('异步请求消息页面读取API成功：' + data)
+                    let html = ''//即将要展示的消息页面
+                    for (let i in data.newsPreferentialItems) {
+                        html += `
+                        <div class="news-area">
+                                                        <div class="news-time">
+                                                            ${data.newsPreferentialItems[i].newTime}
+                                                        </div>
+                                                        <div class="news-detail-area">
+                                                            <div class="news-title">
+                                                                ${data.newsPreferentialItems[i].newTitle}
+                                                            </div>
+                                                            <div class="news-content">
+                                                                <div class="news-description">
+                                                                    ${data.newsPreferentialItems[i].newDescription}
+                                                                </div>
+                                                                <div class="news-source">
+                                                                    ${data.newsPreferentialItems[i].newSource}
+                                                                </div>
+                                                                <img class="news-image"
+                                                                    src=${data.newsPreferentialItems[i].newImg}>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                        `
+                        $('#SpecialOffers').html(html)
+                    }
+                },
+                error: function (xhr, error) {
+                    console.log("异步请求消息页面读取API失败：")
+                    console.log(xhr)
+                    console.log(error)
+                }
+            })
+        })
+        /*为删除地址按钮添加时间监听*/
+
+
+    </script>
+
+    <script>
+     $(document).ready(function () {
+            let id = 1
+            //所有订单
+            $("#allproduct").click(function () {
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:5050/order?' + 'id=' + id,
+                    success: function (data) {
+                        console.log('成功获取数据')
+
+                        let condition = ['', '等待支付', '等待收货', '已收货']//用于显示订单状态
+                        let nowid = -1  //用于判断商品是否属于同一订单id
+
+                        var length = 0;//data长度
+                        for (var ever in data) {
+                            length++;
+                        }
+                        if (data == []) {
+
+                        } else {
+                            let html = `
+                      <div class="table-header">
+                            <div class="row">
+                                <p class="col-xs-6 text-center">商品</p>
+                                <p class="col-xs-3 text-center">价格</p>
+                                <p class="col-xs-3 text-center">数量</p>
+                            </div>
+                        </div>`
+                            for (let i in data) {
+                                if (data[i].order_id != nowid) {
+                                    html += `
+                              <div class="order-box">
+                                <div class="row order-header">
+                                    <div class="order-summary col-xs-offset-1">
+                                        <h4>${condition[data[i].status]}</h4>
+                                     </div>
+                                     <div class="order-id col-xs-offset-1" >
+                                         <p>${data[i].order_id}</p>
+                                     </div>
+                                 </div>
+                                 <ul>
+                                     <li>
+                                         <div class="order-product">
+                                             <div class="row">
+                                                <div class="order-item">
+                                                 <div>
+                                                     <img class="col-xs-2" src="${data[i].sm}">
+                                              </div>
+                                                  <p class="col-xs-4 text-center">${data[i].title}</p>
+                                                  <p class="price col-xs-3 text-center">${data[i].price}</p>
+                                                  <p class="count col-xs-3 text-center">${data[i].count}</p>
+                                                </div>
+                                              </div>
+                                         </div>
+                                     </li>`
+                                } else {
+                                    html += `
+                              <li>
+                                 <div class="order-product">
+                                     <div class="row">
+                                         <div class="order-item">
+                                          <div>
+                                              <img class="col-xs-2" src="${data[i].sm}">
+                                          </div>
+                                           <p class="col-xs-4 text-center">${data[i].title}</p>
+                                           <p class="price col-xs-3 text-center">${data[i].price}</p>
+                                           <p class="count col-xs-3 text-center">${data[i].count}</p>
+                                         </div>
+                                       </div>
+                                  </div>
+                              </li>`
+                                }
+                                nowid = data[i].order_id
+                                if (i < length - 1) {
+                                    if (data[i + 1] != nowid) {
+                                        if (data[i].status == 1) {
+                                            html += `
+                                             <li>
+                                                     <div class="row">
+                                                        <p id="total-price" class="col-xs-offset-10">应付金额：</p>
+                                                        <button class="order-pay col-xs-offset-10 col-xs-1 btn btn-warning">支付</button>
+                                                  </div>
+                                              </li>
+                                             </ul>   
+                                      </div>`
+                                        } else if (data[i].status == 2) {
+                                            html += `
+                                            <li>
+                                                <div class="row">
+                                                    <button class="get-order col-xs-offset-10 col-xs-1 btn btn-warning">收货</button>
+                                                </div>
+                                            </li>
+                                        </ul>   
+                                    </div> `
+                                        } else {
+                                            html += `
+                                            <li>
+                                                <div class="row">
+                                                    <button class="col-xs-offset-10 col-xs-1 btn btn-warning">评价            </button>
+                                                </div>
+                                            </li>
+                                        </ul>   
+                                    </div>`
+                                        }
+                                    }
+                                }
+                            }
+                            if (data[length - 1].status == 1) {
+                                html += `
+                                <li>
+                                    <div class="row">
+                                       <p id="total-price" class="col-xs-offset-10">应付金额：</p>
+                                       <button class="order-pay col-xs-offset-10 col-xs-1 btn btn-warning">支付</button>
+                                    </div>
+                                </li>
+                              </ul>   
+                            </div>`
+                            } else if (data[length - 1].status == 2) {
+                                html += `
+                                <li>
+                                  <div class="row">
+                                      <button class="get-order col-xs-offset-10 col-xs-1 btn btn-warning">收货</button>
+                                 </div>
+                             </li>
+                            </ul>   
+                         </div>`
+                            } else {
+                                html += `
+                                <li>
+                                 <div class="row">
+                                      <button class="col-xs-offset-10 col-xs-1 btn btn-warning">评价            </button>
+                                 </div>
+                             </li>
+                           </ul>   
+                        </div>`
+                            }
+                            $("#all").html(html)
+                        }
+                    },
+                    error: function (xhr, textstatus) {
+                        console.log(xhr)
+                        console.log(textstatus)
+                    }
+                })
+            })
+
+            //第一次点击我的订单，出现的是全部订单信息
+            $("#myorder").click(function () {
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:5050/order?' + 'id=' + id,
+                    success: function (data) {
+                        console.log('成功获取数据')
+                        let condition = ['等待支付', '等待收货', '已收货']//用于显示订单状态
+                        let nowid = -1  //用于判断商品是否属于同一订单id
+
+                        var length = 0;//data长度
+                        for (var ever in data) {
+                            length++;
+                        }
+                        console.log(length)
+                        if (data == []) {
+
+                        } else {
+                            let html = `
+                      <div class="table-header">
+                            <div class="row">
+                                <p class="col-xs-6 text-center">商品</p>
+                                <p class="col-xs-3 text-center">价格</p>
+                                <p class="col-xs-3 text-center">数量</p>
+                            </div>
+                        </div>`
+                            for (let i in data) {
+                                if (data[i].order_id != nowid) {
+                                    html += `
+                              <div class="order-box">
+                                <div class="row order-header">
+                                    <div class="order-summary col-xs-offset-1">
+                                        <h4>${condition[data[i].status]}</h4>
+                                     </div>
+                                     <div class="order-id col-xs-offset-1" >
+                                         <p>${data[i].order_id}</p>
+                                     </div>
+                                 </div>
+                                 <ul>
+                                     <li>
+                                         <div class="order-product">
+                                             <div class="row">
+                                                <div class="order-item">
+                                                 <div>
+                                                     <img class="col-xs-2" src="${data[i].sm}">
+                                              </div>
+                                                  <p class="col-xs-4 text-center">${data[i].title}</p>
+                                                  <p class="price col-xs-3 text-center">${data[i].price}</p>
+                                                  <p class="count col-xs-3 text-center">${data[i].count}</p>
+                                                </div>
+                                              </div>
+                                         </div>
+                                     </li>`
+                                } else {
+                                    html += `
+                              <li>
+                                 <div class="order-product">
+                                     <div class="row">
+                                         <div class="order-item">
+                                          <div>
+                                              <img class="col-xs-2" src="${data[i].sm}">
+                                          </div>
+                                           <p class="col-xs-4 text-center">${data[i].title}</p>
+                                           <p class="price col-xs-3 text-center">${data[i].price}</p>
+                                           <p class="count col-xs-3 text-center">${data[i].count}</p>
+                                         </div>
+                                       </div>
+                                  </div>
+                              </li>`
+                                }
+                                nowid = data[i].order_id
+                                if (i < length - 1) {
+                                    if (data[i + 1] != nowid) {
+                                        if (data[i].status == 1) {
+                                            html += `
+                                             <li>
+                                                     <div class="row">
+                                                        <p id="total-price" class="col-xs-offset-10">应付金额：</p>
+                                                        <button class="order-pay col-xs-offset-10 col-xs-1 btn btn-warning">支付</button>
+                                                  </div>
+                                              </li>
+                                             </ul>   
+                                      </div>`
+                                        } else if (data[i].status == 2) {
+                                            html += `
+                                            <li>
+                                                <div class="row">
+                                                    <button class="get-order col-xs-offset-10 col-xs-1 btn btn-warning">收货</button>
+                                                </div>
+                                            </li>
+                                        </ul>   
+                                    </div> `
+                                        } else {
+                                            html += `
+                                            <li>
+                                                <div class="row">
+                                                    <button class="col-xs-offset-10 col-xs-1 btn btn-warning">评价            </button>
+                                                </div>
+                                            </li>
+                                        </ul>   
+                                    </div>`
+                                        }
+                                    }
+                                }
+                            }
+                            if (data[length - 1].status == 1) {
+                                html += `
+                                <li>
+                                    <div class="row">
+                                       <p id="total-price" class="col-xs-offset-10">应付金额：</p>
+                                       <button class="order-pay col-xs-offset-10 col-xs-1 btn btn-warning">支付</button>
+                                    </div>
+                                </li>
+                              </ul>   
+                            </div>`
+                            } else if (data[length - 1].status == 2) {
+                                html += `
+                                <li>
+                                  <div class="row">
+                                      <button class="get-order col-xs-offset-10 col-xs-1 btn btn-warning">收货</button>
+                                 </div>
+                             </li>
+                            </ul>   
+                         </div>`
+                            } else {
+                                html += `
+                                <li>
+                                 <div class="row">
+                                      <button class="col-xs-offset-10 col-xs-1 btn btn-warning">评价            </button>
+                                 </div>
+                             </li>
+                           </ul>   
+                        </div>`
+                            }
+                            $("#all").html(html)
+                        }
+                    },
+                    error: function (xhr, textstatus) {
+                        console.log(xhr)
+                        console.log(textstatus)
+                    }
+                })
+            })
+
+            //待付款
+            $("#unpaid").click(function () {
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:5050/order?' + 'status=1' + '&id=' + id,
+                    success: function (data) {
+                        console.log('成功获取数据')
+                        let nowid = -1  //用于判断商品是否属于同一订单id
+
+                        var length = 0;//data长度
+                        for (var ever in data) {
+                            length++;
+                        }
+                        if (data == []) {
+
+                        } else {
+                            let html = `
+                      <div class="table-header">
+                            <div class="row">
+                                <p class="col-xs-6 text-center">商品</p>
+                                <p class="col-xs-3 text-center">价格</p>
+                                <p class="col-xs-3 text-center">数量</p>
+                            </div>
+                        </div>`
+
+                            for (let i in data) {
+                                if (data[i].order_id != nowid) {
+                                    html += `
+                              <div class="order-box">
+                                <div class="row order-header">
+                                    <div class="order-summary col-xs-offset-1">
+                                        <h4>等待支付</h4>
+                                     </div>
+                                     <div class="order-id col-xs-offset-1" >
+                                         <p>${data[i].order_id}</p>
+                                     </div>
+                                 </div>
+                                 <ul>
+                                     <li>
+                                         <div class="order-product">
+                                             <div class="row">
+                                                <div class="order-item">
+                                                 <div>
+                                                     <img class="col-xs-2" src="${data[i].sm}">
+                                              </div>
+                                                  <p class="col-xs-4 text-center">${data[i].title}</p>
+                                                  <p class="price col-xs-3 text-center">${data[i].price}</p>
+                                                  <p class="count col-xs-3 text-center">${data[i].count}</p>
+                                                </div>
+                                              </div>
+                                         </div>
+                                     </li>`
+                                } else {
+                                    html += `
+                              <li>
+                                 <div class="order-product">
+                                     <div class="row">
+                                         <div class="order-item">
+                                          <div>
+                                              <img class="col-xs-2" src="${data[i].sm}">
+                                          </div>
+                                           <p class="col-xs-4 text-center">${data[i].title}</p>
+                                           <p class="price col-xs-3 text-center">${data[i].price}</p>
+                                           <p class="count col-xs-3 text-center">${data[i].count}</p>
+                                         </div>
+                                       </div>
+                                  </div>
+                              </li>`
+                                }
+                                nowid = data[i].order_id
+                                if (i < length - 1) {
+                                    if (data[i + 1] != nowid) {
+                                        html += `
+                                <li>
+                                    <div class="row">
+                                       <p id="total-price" class="col-xs-offset-10">应付金额：</p>
+                                       <button class="order-pay col-xs-offset-10 col-xs-1 btn btn-warning">支付</button>
+                                    </div>
+                                </li>
+                              </ul>   
+                            </div>`
+                                    }
+                                }
+                            }
+                            html += `
+                                <li>
+                                    <div class="row">
+                                       <p id="total-price" class="col-xs-offset-10">应付金额：</p>
+                                       <button class="order-pay col-xs-offset-10 col-xs-1 btn btn-warning">支付</button>
+                                    </div>
+                                </li>
+                              </ul>   
+                            </div>`
+                            $("#no-pay").html(html)
+                        }
+                    },
+                    error: function (xhr, textstatus) {
+                        console.log(xhr)
+                        console.log(textstatus)
+                    }
+                })
+            })
+            //待收货
+            $("#unreceive").click(function () {
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:5050/order?' + 'status=2' + '&id=' + id,
+                    success: function (data) {
+                        console.log('成功获取数据')
+                        let nowid = -1  //用于判断商品是否属于同一订单id
+
+                        var length = 0;//data长度
+                        for (var ever in data) {
+                            length++;
+                        }
+
+                        if (data == []) {
+
+                        } else {
+                            let html = `
+                      <div class="table-header">
+                            <div class="row">
+                                <p class="col-xs-6 text-center">商品</p>
+                                <p class="col-xs-3 text-center">价格</p>
+                                <p class="col-xs-3 text-center">数量</p>
+                            </div>
+                        </div>`
+                            for (let i in data) {
+                                if (data[i].order_id != nowid) {
+                                    html += `
+                              <div class="order-box">
+                                <div class="row order-header">
+                                    <div class="order-summary col-xs-offset-1">
+                                        <h4>等待收货</h4>
+                                     </div>
+                                     <div class="order-id col-xs-offset-1" >
+                                         <p>${data[i].order_id}</p>
+                                     </div>
+                                 </div>
+                                 <ul>
+                                     <li>
+                                         <div class="order-product">
+                                             <div class="row">
+                                                <div class="order-item">
+                                                 <div>
+                                                     <img class="col-xs-2" src="${data[i].sm}">
+                                              </div>
+                                                  <p class="col-xs-4 text-center">${data[i].title}</p>
+                                                  <p class="price col-xs-3 text-center">${data[i].price}</p>
+                                                  <p class="count col-xs-3 text-center">${data[i].count}</p>
+                                                </div>
+                                              </div>
+                                         </div>
+                                     </li>`
+                                } else {
+                                    html += `
+                              <li>
+                                 <div class="order-product">
+                                     <div class="row">
+                                         <div class="order-item">
+                                          <div>
+                                              <img class="col-xs-2" src="${data[i].sm}">
+                                          </div>
+                                           <p class="col-xs-4 text-center">${data[i].title}</p>
+                                           <p class="price col-xs-3 text-center">${data[i].price}</p>
+                                           <p class="count col-xs-3 text-center">${data[i].count}</p>
+                                         </div>
+                                       </div>
+                                  </div>
+                              </li>`
+                                }
+                                nowid = data[i].order_id
+                                if (i < length - 1) {
+                                    if (data[i + 1] != nowid) {
+                                        html += `
+                                        <li>
+                                                <div class="row">
+                                                    <button class="get-order col-xs-offset-10 col-xs-1 btn btn-warning">收货</button>
+                                                </div>
+                                            </li>
+                                        </ul>   
+                                    </div> `
+                                    }
+                                }
+                            }
+                            html += `
+                            <li>
+                                <div class="row">
+                                   <button class="get-order col-xs-offset-10 col-xs-1 btn btn-warning">收货</button>
+                                 </div>
+                            </li>
+                       </ul>   
+                    </div> `
+                            $("#no-get").html(html)
+                        }
+                    },
+                    error: function (xhr, textstatus) {
+                        console.log(xhr)
+                        console.log(textstatus)
+                    }
+                })
+            })
+            //订单回收
+            $("#recycle-order").click(function () {
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:5050/order?' + 'status=1' + '&id=' + id,
+                    success: function (data) {
+                        console.log('成功获取数据')
+                        let nowid = -1  //用于判断商品是否属于同一订单id
+
+                        var length = 0;//data长度
+                        for (var ever in data) {
+                            length++;
+                        }
+                        if (data == []) {
+
+                        } else {
+                            let html = `
+                      <div class="table-header">
+                            <div class="row">
+                                <p class="col-xs-6 text-center">商品</p>
+                                <p class="col-xs-3 text-center">价格</p>
+                                <p class="col-xs-3 text-center">数量</p>
+                            </div>
+                        </div>`
+                            for (let i in data) {
+                                if (data[i].order_id != nowid) {
+                                    html += `
+                              <div class="order-box">
+                                <div class="row">
+                                    <div class="order-summary col-xs-offset-1">
+                                        <h4>已收货</h4>
+                                     </div>
+                                     <div class="order-id col-xs-offset-1" >
+                                         <p>${data[i].order_id}</p>
+                                     </div>
+                                 </div>
+                                 <ul>
+                                     <li>
+                                         <div class="order-product">
+                                             <div class="row">
+                                                <div class="order-item">
+                                                 <div>
+                                                     <img class="col-xs-2" src="${data[i].sm}">
+                                              </div>
+                                                  <p class="col-xs-4 text-center">${data[i].title}</p>
+                                                  <p class="price col-xs-3 text-center">${data[i].price}</p>
+                                                  <p class="count col-xs-3 text-center">${data[i].count}</p>
+                                                </div>
+                                              </div>
+                                         </div>
+                                     </li>`
+                                } else {
+                                    html += `
+                              <li>
+                                 <div class="order-product">
+                                     <div class="row">
+                                         <div class="order-item">
+                                          <div>
+                                              <img class="col-xs-2" src="${data[i].sm}">
+                                          </div>
+                                           <p class="col-xs-4 text-center">${data[i].title}</p>
+                                           <p class="price col-xs-3 text-center">${data[i].price}</p>
+                                           <p class="count col-xs-3 text-center">${data[i].count}</p>
+                                         </div>
+                                       </div>
+                                  </div>
+                              </li>`
+                                }
+                                nowid = data[i].order_id
+                                if (i < length - 1) {
+                                    if (data[i + 1] != nowid) {
+                                        html += `
+                                        <li>
+                                            <div class="row">
+                                                <button class="get-order col-xs-offset-10 col-xs-1 btn btn-warning">评价</button>
+                                              </div>
+                                        </li>
+                                   </ul>   
+                                </div> `
+                                    }
+                                }
+                            }
+                            html += `
+                            <li>
+                               <div class="row">
+                                   <button class="col-xs-offset-10 col-xs-1 btn btn-warning">评价</button>
+                               </div>
+                          </li>
+                     </ul>   
+                 </div> `
+                            $("#funish").html(html)
+                        }
+                    },
+                    error: function (xhr, textstatus) {
+                        console.log(xhr)
+                        console.log(textstatus)
+                    }
+                })
+            })
+
+            //计算总价
+            $(".unpaid").click(function () {
+
+                $(".order-box").each(function () {
+                    let total = 0
+                    $(this).find("li").each(function () {
+                        let price = parseInt($(this).find(".price").text())
+                        let count = parseInt($(this).find(".count").text())
+                        console.log(price, count)
+                        total += price * count
+                    })
+                    $(".total").html(total)
+                })
+            })
+
+            //提交订单进行支付
+            $(".order-pay").click(function () {
+                let oid = $(this).parent().parent().find(".order-id").children("p").val()
+                let money = $(this).parent().find(".total").children("p").val()
+                $.ajex({
+                    method: 'POST',
+                    url: 'http://127.0.0.1:5050/order/pay',
+                    data: `money=${money}&status=1&oid=${oid}`,
+                    success: function (data) {
+                        alert(data)
+                        window.location.reload()
+                    },
+                    error: function (xhr, textstatus) {
+                        alert(xhr)
+                        alert(textstatus)
+                    }
+                })
+            })
+
+            //提交待收货的订单进行收货
+            $(".get-order").click(function () {
+                let oid = $(this).parent().parent().find(".order-id").children("p").val()
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:5050/order/successget?' + 'oid=' + oid,
+                    success: function (data) {
+                        alert(data)
+                        window.location.reload()
+                    }
+                })
+            })
+        })
+    
+    </script>
+
+    <!--弹出式对话框：表示修改密码成功-->
+    <div id="modalChangePwdSucc" class="modal fade">
+        <!--半透明遮罩-->
+        <div class="modal-dialog modal-sm">
+            <!--对话框尺寸、位置-->
+            <div class="modal-content">
+                <!--边框、倒角、背景色-->
+                <!--头部-->
+                <div class="modal-header">
+                    <h4 class="modal-title">修改成功</h4>
+                </div>
+                <!--主体-->
+                <div class="modal-body">
+                    <p>密码修改成功！</p>
+                </div>
+                <!--尾部-->
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal">确定</button>
+                    <!-- $('[data-dismiss="modal"]').click(function(){})-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--弹出式对话框：表示修改密码失败-->
+    <div id="modalChangePwdFail" class="modal fade">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <!--头部-->
+                <div class="modal-header">
+                    <h4 class="modal-title">修改失败</h4>
+                </div>
+                <!--主体-->
+                <div class="modal-body">
+                    <p><b>密码修改失败！</b></p>
+                    <p>服务器返回的错误消息：<span id="serverErrMsg"></span></p>
+                </div>
+                <!--尾部-->
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--弹出式对话框：表示新建地址成功-->
+    <div id="modalNewAddressSucc" class="modal fade">
+        <!--半透明遮罩-->
+        <div class="modal-dialog modal-sm">
+            <!--对话框尺寸、位置-->
+            <div class="modal-content">
+                <!--边框、倒角、背景色-->
+                <!--头部-->
+                <div class="modal-header">
+                    <h4 class="modal-title">新建成功</h4>
+                </div>
+                <!--主体-->
+                <div class="modal-body">
+                    <p>地址新建成功！</p>
+                </div>
+                <!--尾部-->
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal">确定</button>
+                    <!-- $('[data-dismiss="modal"]').click(function(){})-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--弹出式对话框：表示新建地址失败-->
+    <div id="modalNewAddressFail" class="modal fade">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <!--头部-->
+                <div class="modal-header">
+                    <h4 class="modal-title">新建失败</h4>
+                </div>
+                <!--主体-->
+                <div class="modal-body">
+                    <p><b>地址新建失败！</b></p>
+                    <p>服务器返回的错误消息：<span id="serverErrMsg"></span></p>
+                </div>
+                <!--尾部-->
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /*加载页面数据*/
+        $(window).load(function () {
+            //加载页头和页尾
+            $('#header').load('/../header.html')
+            $('#footer').load('/../footer.html')
+
+            //加载用户的部分个人信息
+            let addFlag = 0
+            let htmluser = ``
+            let htmlAddCount = ``
+            let uid = sessionStorage.getItem('uid')
+            console.log(uid)
+            $.ajax({
+                method: 'GET',
+                url: 'http://127.0.0.1:5050/user',
+                data: `uid=${uid}`,
+                success: function (data) {
+                    console.log('成功获取到服务器异步返回的用户详细数据：', data)
+                    //获取用户信息
+                    htmluser = `
+                    <!--1F用户个人信息-->
+                                        <div data-v-1 class="portal-main clearfix">
+                                            <div data-v-1 class="user-card">
+                                                <h2 data-v-1 class="user-name">${data.uname}</h2>
+                                                <p data-v-1 class="tip">晚上好~</p>
+                                                <a data-v-1 href="/../user/userInfo.html" target="_blank" class="link">修改个人信息</a>
+                                                <img data-v-1 src="${data.avatar}" width="150" height="150" alt class="avatar">
+                                            </div>
+                                            <div data-v-1 class="user-actions">
+                                                <ul data-v-1 class="action-list">
+                                                    <li data-v-1>账户安全：
+                                                        <span data-v-1 class="level level-2">普通</span>
+                                                    </li>
+                                                    <li data-v-1>绑定手机：
+                                                        <span data-v-1 class="tel">${data.phone}</span>
+                                                    </li>
+                                                    <li data-v-1>绑定邮箱：
+                                                        <span data-v-1 class="tel">${data.email}</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                    `
+                    addFlag++
+                    if (addFlag === 2) {
+                        $('#userCard').html(htmluser + htmlAddCount)
+                    }
+                }
+            })
+
+            //加载用户的订单统计数据
+            $.ajax({
+                method: 'GET',
+                url: 'http://127.0.0.1:5050/userOrderCount',
+                data: `uid=${uid}`,
+                success: function (data) {
+                    console.log('成功获取到服务器异步返回的用户统计订单信息数据：', data)
+                    let htmlAddCount = `
+                     <!--2F个人订单及个人商品统计-->
+                                        <div data-v-2 id="personalCount" class="portal-sub">
+                                            <ul data-v-2 class="info-list clearfix">
+                                                <li data-v-2>
+                                                    <h3 data-v-2>待支付的订单：
+                                                        <span data-v-2 class="num">${data.unpaidCount[0].COUNT1}</span>
+                                                    </h3>
+                                                    <a data-v-2 href="#">查看待支付订单
+                                                        <i data-v-2 class="iconfont">></i>
+                                                    </a>
+                                                    <img data-v-2 src="/img/user/portal-icon-1.png" alt>
+                                                </li>
+                                                <li data-v-2>
+                                                    <h3 data-v-2>待收货的订单：
+                                                        <span data-v-2 class="num">${data.undeliveredCount[0].COUNT2}</span>
+                                                    </h3>
+                                                    <a data-v-2 href="#">查看待收货订单
+                                                        <i data-v-2 class="iconfont">></i>
+                                                    </a>
+                                                    <img data-v-2 src="/img/user/portal-icon-2.png" alt>
+                                                </li>
+                                                <li data-v-2>
+                                                    <h3 data-v-2>待评价商品数：
+                                                        <span data-v-2 class="num">${data.unevaluatedCount[0].COUNT3}</span>
+                                                    </h3>
+                                                    <a data-v-2 href="#">查看待评价的商品
+                                                        <i data-v-2 class="iconfont">></i>
+                                                    </a>
+                                                    <img data-v-2 src="/img/user/portal-icon-3.png" alt>
+                                                </li>
+                                                <li data-v-2>
+                                                    <h3 data-v-2>喜欢的商品：
+                                                        <span data-v-2 class="num">0</span>
+                                                    </h3>
+                                                    <a data-v-2 href="#">查看喜欢的商品
+                                                        <i data-v-2 class="iconfont">></i>
+                                                    </a>
+                                                    <img data-v-2 src="/img/user/portal-icon-4.png" alt>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                     `
+                    addFlag++
+                    if (addFlag === 2) {
+                        $('#userCard').html(htmluser + htmlAddCount)
+                    }
+                }
+            })
+
+            //异步提交用户的输入给后台API
+            $.ajax({
+                method: 'GET',
+                url: 'http://127.0.0.1:5050/news',
+                data: `uid=${uid}`,
+                success: function (data, msg, xhr) {
+                    console.log('异步请求消息页面读取API成功：' + data)
+                    let html = ''//即将要展示的消息页面
+                    for (let i in data.newsItems) {
+                        html += `
+                        <div class="news-area">
+                                                        <div class="news-time">
+                                                            ${data.newsItems[i].newTime}
+                                                        </div>
+                                                        <div class="news-detail-area">
+                                                            <div class="news-title">
+                                                                ${data.newsItems[i].newTitle}
+                                                            </div>
+                                                            <div class="news-content">
+                                                                <div class="news-description">
+                                                                    ${data.newsItems[i].newDescription}
+                                                                </div>
+                                                                <div class="news-source">
+                                                                    ${data.newsItems[i].newSource}
+                                                                </div>
+                                                                <img class="news-image"
+                                                                    src=${data.newsItems[i].newImg}>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                        `
+                        $('#Allnews').html(html)
+                    }
+                },
+                error: function (xhr, error) {
+                    console.log("异步请求消息页面读取API失败：")
+                    console.log(xhr)
+                    console.log(error)
+                }
+            })
+
+            //加载用户收货地址
+            $.ajax({
+                method: 'GET',
+                url: 'http://127.0.0.1:5050/user/showAddress',
+                data: `uid=${uid}`,
+                success: function (data, msg, xhr) {
+                    let html = ''//即将要展示的消息页面
+                    for (let i in data) {
+                        html += `
+                        <div class="address-content">
+                                                    <div class="receiver">${data[i].receiver}</div>
+                                                    <div class="address-phone">${data[i].phone}</div>
+                                                    <a id="${data[i].addressid}" href="#" class="address-delete" title="删除"><i class="iconfont">×</i></a>
+                                                    <div class="address-area">${data[i].area}</div>
+                                                    <div class="address-details">${data[i].address}</div>
+                                                    
+                                                </div>
+                        `
+                        $('#userAddress').html(html)
+                    }
+                    $(".address-delete").click(function () {
+                        console.log("删除按钮触发")
+                        let addressid = $(this).attr("id")
+                        $.ajax({
+                            method: 'POST',
+                            url: 'http://127.0.0.1:5050/user/deleteAddress',
+                            data: `addressid=${addressid}`,
+                            success: function (data, msg, xhr) {
+                                console.log('异步请求删除地址API成功：' + data)
+
+                            },
+                            error: function (xhr, error) {
+                                console.log("异步请求删除地址API失败：")
+                                console.log(xhr)
+                                console.log(error)
+                            }
+                        })
+                        $(this).parent(".address-content").remove();
+                    })
+
+                },
+                error: function (xhr, error) {
+                    console.log("异步请求消息页面读取API失败：")
+                    console.log(xhr)
+                    console.log(error)
+                }
+            })
+        })
+
+
+
+    </script>
+    <script src="/js/header.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+div{
+    /* border:1px solid #000; */
+}
+a:hover{
+    text-decoration:none
+    
+}
+a:link {
+    text-decoration:none
+    
+}
+
+
+.good-list-body{
+    background-color: #FFFFFF;
+}
+
+.collapse-heading{
+    padding: 10px 30px;
+    
+}
+
+.collapse-body{
+    padding: 10px 30px;
+}
+
+.collapse-title{
+    font-size:1.5em;
+    color: #F96003;
+    
+}
+
+
+.product-img{
+    width: 100%;
+    /* position: relative;
+      padding-left: 110px;
+      top: 20px; */
+}
+
+.product-title{
+    text-align: center;
+    position: relative;
+    top:20px;
+    font-size: 1.4em;
+}
+
+.collapse-inner .row .col-md-3{
+     height: 350px; 
+
+    border-right:0.5px solid rgba(139, 136, 136, 0.76);
+    border-left:0.5px solid rgba(139, 136, 136, 0.76);
+    border-top:0.5px solid rgba(139, 136, 136, 0.76);
+}
+

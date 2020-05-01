@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+  <title>学子注册页面</title>
+
+  <!-- Bootstrap -->
+  <link rel="shortcut icon" type="image/icon" href="/img/wm-icon.jpg" />
+   
+  <link href="/css/bootstrap.css" rel="stylesheet">
+  <link href="/css/scaffolding.css" rel="stylesheet">
+
+  <link href="/css/indexcss.css" rel="stylesheet">
+
+  <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+  <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+  <nav class="header" id="header"></nav>
+
+
+  <!-- 轮播广告 -->
+  <div class="advertiest">
+    <div class="container">
+      <div id="advert" class="carousel slide" data-ride="carousel">
+        <!--轮播广告内容-->
+        <div class="carousel-inner">
+          <!--轮播广告内容，异步请求-->
+        </div>
+        <!--轮播控制按钮-->
+        <a class="left carousel-control" href="#advert" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">previous</span>
+        </a>
+        <a class="right carousel-control" href="#advert" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden=true></span>
+          <span class="sr-only">next</span>
+        </a>
+        <!--轮播分页器-->
+        <ol class="carousel-indicators">
+          <li data-target="#advert" data-slide-to="0" class="active"></li>
+          <li data-target="#advert" data-slide-to="1"></li>
+          <li data-target="#advert" data-slide-to="2"></li>
+        </ol>
+
+      </div>
+    </div>
+  </div>
+  <!--各类商品-->
+  <div class="main">
+
+    <div id="phone" class="container">
+      <div class="phone">
+        <h2 class="title">手机</h2>
+      </div>
+
+    </div>
+
+    <!--电脑-->
+    <div id="computer" class="container">
+      <div class="computer">
+        <h2 class="title">电脑</h2>
+      </div>
+    </div>
+
+    <!--电视-->
+    <div id="tv" class="container">
+      <div class="tv">
+        <h2 class="title">电视</h2>
+      </div>
+    </div>
+  </div>
+
+
+
+  
+  <div class="footer" id="footer">
+
+  </div>
+
+
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+  <script>
+
+
+
+    //页面加载完毕，异步请求服务器动态数据
+    $(window).load(function () {
+      //导航栏
+      $('#header').load('header.html')
+      $('#footer').load('footer.html')
+      $.ajax({
+        method: 'GET',
+        url: 'http://127.0.0.1:5050/index/carousel',
+        success: function (data) {
+          console.log('成功获取到服务器数据')
+
+          //轮播广告的动态数据
+          let html = ''
+          for (let i in data) {
+            html += `
+                   <div class="item ${i == 0 ? 'active ' : ''}">
+                     <img src="${data[i].img}" alt="">
+                   </div>
+                   `
+          }
+          $('.carousel-inner').html(html)
+        },
+        error: function (xhr, textstatus) {
+          // alert(xhr)
+          // alert(textstatus)
+        }
+      })
+      //处理手机界面
+      $.ajax({
+        method: 'GET',
+        url: 'http://127.0.0.1:5050/index/product',
+        success: function (data) {
+          console.log('成功获取数据',data)
+          //手机
+          let data1 = data.phone
+          let htmlphone = $('#phone').html()
+          //电脑
+          let data2 = data.computer
+          let htmlcom = $('#computer').html()
+          //电视
+          let data3 = data.tv
+          let htmltv = $('#tv').html()
+
+          //手机循环
+          for (let i in data1) {
+            if (i == 0 || i == 4) {
+              htmlphone += `<div class="row">`
+            }
+            htmlphone += `
+                   <div class="col-md-3 col-xs-6">
+               <div class="main-item">
+                <div class="row">
+                  <a href="${data1[i].href}">
+                    <div class="col-xs-12">
+                      <div>
+                       <img class="main-img" src="${data1[i].img}">
+                      </div>
+                      <h4 class="text-center">${data1[i].title}</h4>
+                      <p class="text-center">${data1[i].detail}</p>
+                      <p class="text-center">${data1[i].price}</p>
+                    </div>
+                  </a>
+                </div>
+               </div>
+             </div>
+                   `
+            if (i == 3 || i == 7) {
+              htmlphone += `</div>`
+            }
+          }
+          $("#phone").html(htmlphone)
+
+          //电脑循环
+          for (let i in data2) {
+            if (i == 0 || i == 4) {
+              htmlcom += `<div class="row">`
+            }
+            htmlcom += `
+                   <div class="col-md-3 col-xs-6">
+               <div class="main-item">
+                <div class="row">
+                  <a href="${data2[i].href}">
+                    <div class="col-xs-12">
+                      <div>
+                       <img class="main-img" src="${data2[i].img}">
+                      </div>
+                      <h4 class="text-center">${data2[i].title}</h4>
+                      <p class="text-center">${data2[i].detail}</p>
+                      <p class="text-center">${data2[i].price}</p>
+                    </div>
+                  </a>
+                </div>
+               </div>
+             </div>
+                   `
+            if (i == 3 || i == 7) {
+              htmlcom += `</div>`
+            }
+          }
+          $("#computer").html(htmlcom)
+
+          //电视循环
+          for (let i in data3) {
+            if (i == 0 || i == 4) {
+              htmltv += `<div class="row">`
+            }
+            htmltv += `
+                   <div class="col-md-3 col-xs-6">
+               <div class="main-item">
+                <div class="row">
+                  <a href="${data3[i].href}">
+                    <div class="col-xs-12">
+                      <div>
+                       <img class="main-img" src="${data3[i].img}">
+                      </div>
+                      <h4 class="text-center">${data3[i].title}</h4>
+                      <p class="text-center">${data3[i].detail}</p>
+                      <p class="text-center">${data3[i].price}</p>
+                    </div>
+                  </a>
+                </div>
+               </div>
+             </div>
+                   `
+            if (i == 3 || i == 7) {
+              htmltv += `</div>`
+            }
+          }
+          $("#tv").html(htmltv)
+
+
+        }
+      })
+
+
+
+
+
+
+    })
+
+
+
+
+
+
+  </script>
+  <script src="/js/header.js"></script>
+  <script>
+
+
+
+
+  </script>
+</body>
+
+</html>
+
+

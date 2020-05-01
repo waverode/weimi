@@ -1,0 +1,63 @@
+.wm-yellow{
+    background-color: #ff6700;
+}
+.wm-white{
+    background-color: #ffffff;
+}
+.wm-gray{
+    background-color: #504f4d;
+}
+.wm-header{
+   background-color: #504f4d;
+   height: 50px;
+}
+.wm-height1{
+    height: 50px;
+}
+.wm-header-font{
+    color: white;
+    font-size: 40px;
+}
+.wm-blank{
+    height: 10px;
+}
+.wm-blank1{
+    height: 5px;
+}
+.wm-border{
+    border-bottom: 1px solid #aaa;
+    height: 20px;
+}
+.wm-logo-header{
+    background-color: #ffffff;
+    height: 120px;
+}
+.wm-iconbar{
+    padding:30px 0px;
+    
+    /* background-color: #ffffff; */
+}
+.wm-icon{
+    width: 40px;
+    height: 40px;
+}
+.sm-font{
+     font-size: 1.3rem;
+     margin-bottom: 6px;
+ } 
+ .wm-header-logo{
+     width: 50px;
+     height: 50px;
+     margin-left: 15px;
+ }
+.wm-logo-font{
+   
+    font-size: 25px;
+    color: white;
+}
+.wm-logo-img{
+    height: 50px;
+}
+@media screen and (max-width:992px) and (min-width:768px){
+
+}

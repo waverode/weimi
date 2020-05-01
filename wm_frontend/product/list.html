@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>全部商品</title>
+    <!-- Bootstrap -->
+    <link rel="shortcut icon" type="image/icon" href="/img/wm-icon.jpg" />
+
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/list.css">
+  </head>
+  <body>
+    <!-- 页头 -->
+    <div class="header">
+      
+    </div>
+    <!-- 主体 -->
+    <div class="good-list-body">
+      <div class="container">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <!-- //手机栏 -->
+          <div class="panel panel-default">
+            <div class="collapse-heading" role="tab" id="heading-phone" >
+              <h4 class="panel-title">
+                <a role="button" id="a-phone"  data-toggle="collapse" data-parent="#accordion" href="#collapse-phone" aria-expanded="true" aria-controls="collapse-phone">
+                  <div class="collapse-title "> 
+                    <span class=" glyphicon glyphicon-chevron-right" style="padding:0px 10px ;"></span>手机
+                  </div>
+                </a>
+              </h4>
+            </div>
+            <div id="collapse-phone" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-phone">
+              <div class="collapse-body">
+                <div class="collapse-inner">
+                  <div class="row" id="list-phone">
+                  <!-- 动态装入数据 -->
+                  </div>
+                 </div>
+              </div>
+            </div>
+          </div>
+          <!-- 电脑栏 -->
+          <div class="panel panel-default">
+            <div class="collapse-heading" role="tab" id="heading-computer">
+              <h4 class="panel-title">
+                <a role="button" id="a-computer" data-toggle="collapse" data-parent="#accordion" href="#collapse-computer" aria-expanded="true" aria-controls="collapse-computer">
+                  <div class="collapse-title "> 
+                    <span class=" glyphicon glyphicon-chevron-right" style="padding:0px 10px ;"></span>电脑
+                  </div>
+                </a>
+              </h4>
+            </div>
+            <div id="collapse-computer" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-phone">
+              <div class="collapse-body">
+                <div class="collapse-inner">
+                  <div class="row" id="list-computer">
+                  <!-- 动态装入数据 -->
+                  </div>
+                 </div>
+              </div>
+            </div>
+          </div>
+          <!-- 电视栏 -->
+          <div class="panel panel-default">
+            <div class="collapse-heading" role="tab" id="heading-tv">
+              <h4 class="panel-title">
+                <a role="button" id="a-tv" data-toggle="collapse" data-parent="#accordion" href="#collapse-tv" aria-expanded="true" aria-controls="colltvapse-tv">
+                  <div class="collapse-title "> 
+                    <span class=" glyphicon glyphicon-chevron-right" style="padding:0px 10px ;"></span>电视
+                  </div>
+                </a>
+              </h4>
+            </div>
+            <div id="collapse-tv" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-tv">
+              <div class="collapse-body">
+                <div class="collapse-inner">
+                  <div class="row" id="list-tv">
+                  <!-- 动态装入数据 -->
+                  </div>
+                 </div>
+              </div>
+            </div>
+          </div>
+         
+        </div>     
+      </div>
+    </div>
+    <!-- 页尾 -->
+    <div class="footer">
+      
+    </div>
+    
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script>
+     // 页面加载完成，异步请求服务器端的动态数据
+     $(window).load(function(){
+       //加载页头页尾
+      $('.header').load('../header.html')
+      $('.footer').load('../footer.html')
+
+      let phoneLoeded = false
+      let computerLoeded = false
+      let tvLoeded = false
+          let html = ''
+          let html2 = ''
+          let html3 = ''
+      $.when(
+        //异步提交用户的输入给后台API  手机栏
+        $.ajax({
+        method: 'GET',
+        url: 'http://127.0.0.1:5050/product/list?category=phone',
+        success:function(data){
+          let data1=data.data
+          let picList = data.picList
+          console.log(picList)
+          for(let i in data1){
+            html+=`
+            <div class="col-md-3 col-xs-6">
+                  <a href="/product/details.html?pid=${data1[i].pid}" class="product-a">             
+                    <img src="${picList[i].md}" class=" product-img" alt="">  
+                    <h4 class=" product-title">${data1[i].name}</h4>
+                  </a>
+                </div>
+            `
+          }
+          // $('#list-phone').html(html)
+          phoneLoeded=true
+        }
+      
+      }),
+     
+      //异步提交用户的输入给后台API  电脑
+      $.ajax({
+        method: 'GET',
+        url: 'http://127.0.0.1:5050/product/list?category=computer',
+        success:function(data){
+          let data1=data.data
+          let picList = data.picList
+          console.log(picList)
+          for(let i in data1){
+            html2+=`
+            <div class="col-md-3 col-xs-6">
+                  <a href="/product/details.html?pid=${data1[i].pid}" class="product-a">             
+                    <img src="${picList[i].md}" class=" product-img" alt="">  
+                    <h4 class=" product-title">${data1[i].name}</h4>
+                  </a>
+                </div>
+            `
+          }
+          computerLoeded=true
+          // $('#list-computer').html(html2)
+
+        }
+      
+      }),
+       //异步提交用户的输入给后台API  电视
+       $.ajax({
+        method: 'GET',
+        url: 'http://127.0.0.1:5050/product/list?category=tv',
+        success:function(data){
+          let data1=data.data
+          let picList = data.picList
+          console.log(picList)
+          for(let i in data1){
+            html3+=`
+            <div class="col-md-3 col-xs-6">
+                  <a href="/product/details.html?pid=${data1[i].pid}" class="product-a">             
+                    <img src="${picList[i].md}" class=" product-img" alt="">  
+                    <h4 class=" product-title">${data1[i].name}</h4>
+                  </a>
+                </div> `
+          }
+          tvLoeded=true
+          // $('#list-tv').html(html3)
+        }      
+      })
+      ).done(function(){
+         if(computerLoeded&&tvLoeded&&phoneLoeded){
+            $('#list-phone').html(html)
+            $('#list-computer').html(html2)
+            $('#list-tv').html(html3)
+             }
+      }).fail(function(){
+        console.log("false")
+      })
+          
+     })
+     //控制折叠栏的图标左下切换 手机栏
+     $('#collapse-phone').on('hidden.bs.collapse', function () {
+      html=`
+      <div class="collapse-title "> 
+        <span class=" glyphicon glyphicon-chevron-right" style="padding:0px 10px ;"></span>手机
+      </div>
+      `
+      $('#a-phone').html(html)
+      })
+     $('#collapse-phone').on('shown.bs.collapse', function () {
+      html=`
+      <div class="collapse-title "> 
+        <span class=" glyphicon glyphicon-chevron-down" style="padding:0px 10px ;"></span>手机
+      </div>
+      `
+      $('#a-phone').html(html)
+      })
+     //控制折叠栏的图标左下切换 电脑栏
+     $('#collapse-computer').on('hidden.bs.collapse', function () {
+      html=`
+      <div class="collapse-title "> 
+        <span class=" glyphicon glyphicon-chevron-right" style="padding:0px 10px ;"></span>电脑
+      </div>
+      `
+      $('#a-computer').html(html)
+      })
+     $('#collapse-computer').on('shown.bs.collapse', function () {
+      html=`
+      <div class="collapse-title "> 
+        <span class=" glyphicon glyphicon-chevron-down" style="padding:0px 10px ;"></span>电脑
+      </div>
+      `
+      $('#a-computer').html(html)
+      })
+     //控制折叠栏的图标左下切换 电视栏
+     $('#collapse-tv').on('hidden.bs.collapse', function () {
+      html=`
+      <div class="collapse-title "> 
+        <span class=" glyphicon glyphicon-chevron-right" style="padding:0px 10px ;"></span>电视
+      </div>
+      `
+      $('#a-tv').html(html)
+      })
+     $('#collapse-tv').on('shown.bs.collapse', function () {
+      html=`
+      <div class="collapse-title "> 
+        <span class=" glyphicon glyphicon-chevron-down" style="padding:0px 10px ;"></span>电视
+      </div>
+      `
+      $('#a-tv').html(html)
+      })
+    
+
+
+    </script>
+    <script src="/js/header.js"></script>
+</body>
+</html>

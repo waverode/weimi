@@ -1,0 +1,16 @@
+{
+  "name": "wm",
+  "version": "1.0.0",
+  "description": "a web project",
+  "main": "main.js",
+  "scripts": {
+    "test": "node test.js "
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.1.0",
+    "express": "^4.17.1",
+    "mysql": "^2.17.1"
+  }
+}

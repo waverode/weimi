@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>支付</title>
+
+    <!-- Bootstrap -->
+    <link rel="shortcut icon" type="image/icon" href="/img/wm-icon.jpg" />
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/scaffolding.css">
+
+    <link rel="stylesheet" href="/css/pay.css">
+
+</head>
+
+<body>
+    <!-- 页头 -->
+    <div class="wm-pay-header">
+        <div class="container-fluid">
+            <!-- <div class="row clearfix">
+                <div class="col-md-12 column"> -->
+            <div class="row clearfix">
+                <div class="col-md-2 hidden-xs hidden-sm column">
+                    <div class="header-logo">
+                        <a href="#" class="logo " title="微米官网"><img src="/img/wm-icon.jpg" style="width: 40%; height: 40%;" alt="微米官网"></a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-7 column">
+                    <div class="header-title">
+                        <h2>确认订单</h2>
+                    </div>
+                </div>
+                <div class="col-md-3 hidden-xs hidden-sm column">
+                    <div class="header-info">
+                        <a href="#" class="navbar-text navbar-link navbar-left"><span id="js_user"></span>,欢迎</a>
+                        <span class="navbar-text navbar-left">|</span>
+                        <a href="#" class="navbar-text navbar-link navbar-left">用户中心</a>
+                    </div>
+                </div>
+            </div>
+            <!-- </div>
+            </div> -->
+        </div>
+    </div>
+    <!-- 主体 -->
+    <div class="container">
+        <!-- 订单信息 -->
+        <div class="wm-pay-main">
+            <div class="wm-pay-box">
+                <!-- 添加地址 -->
+                <div class="row row-address">
+                    <div class="col-xs-12">
+                        <h3 class="title">收货地址</h3>
+                    </div>
+                    <div class="col-xs-12">
+                        <h3 class="add-address js_address" id=""></h3>
+                    </div>
+                </div>
+                <!-- 商品 -->
+                <div class="row row-goods" id="js_goodlist">
+                    <div class="col-sm-12">
+                        <h3 class="title">商品</h3>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row-good-info">
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- 运费 -->
+                <div class="row-cell">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-2">
+                            <h4 class="box-font passwork-title">配送方式</h4>
+                        </div>
+                        <div class="col-xs-9 col-sm-10">
+                            <h4 class="box-font passwork-kind">包邮</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- 优惠券 -->
+                <div class="row-cell">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-2">
+                            <h4 class="box-font coupon-title">优惠券</h4>
+                        </div>
+                        <div class="col-xs-9 col-sm-10 coupon-info">
+                            <h4 class="box-font"><a href="#">无可用 >></a></h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- 发票 -->
+                <div class="row-cell">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-2">
+                            <h4 class="box-font invoice-title">发票</h4>
+                        </div>
+                        <div class="col-xs-9 col-sm-10 box-font invoice-info">
+                            <span>电子发票</span>
+                            <span>个人</span>
+                            <span>商品明细</span>
+                            <a href="#">修改 >></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 统计 -->
+                <div class="row-statistics">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="statistics-box">
+                                <ul>
+                                    <li>
+                                        <label>商品件数：</label>
+                                        <span class="val"><i id="stacounts">0</i>件</span>
+                                    </li>
+                                    <li>
+                                        <label>商品总价：</label>
+                                        <span class="val"><i id="staprices">0.00</i>元</span>
+                                    </li>
+                                    <li>
+                                        <label>优惠券抵扣：</label>
+                                        <span class="val">-<i id="stacoupon">0.00</i>元</span>
+                                    </li>
+                                    <li>
+                                        <label>运费：</label>
+                                        <span class="val"><i id="stafreight">0.00</i>元</span>
+                                    </li>
+                                    <li>
+                                        <label>应付总额：</label>
+                                        <span class="val">
+                                            <em id="stapay">0.00</em>元
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 工具栏 -->
+        <div class="section-bar">
+            <div class="row">
+                <div class="col-sm-6 hidden-xs"></div>
+                <div class="col-xs-6 col-sm-3">
+                    <div class="text-right">
+                        <a href="/cart/cart.html" class="btn btn-return">返回购物车</a>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3">
+                    <div class="text-left">
+                        <a href="#" class="btn btn-pay" id="js_order">去下单</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 模态框：登录提醒 -->
+    <div class="modal fade" id="checklogin" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">获取购物车失败</h4>
+                </div>
+                <div class="modal-body">
+                    <h2 style="text-align: center;">请登录&hellip;</h2>
+                </div>
+                <div class="modal-footer">
+                    <a href="#"><button type="button" class="btn btn-primary">Login</button></a>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/pay.js"></script>
+    <script>
+     
+    </script>
+</body>
+
+</html>
+
+
+

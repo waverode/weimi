@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>商品</title>
+
+    <!-- Bootstrap -->
+    <link rel="shortcut icon" type="image/icon" href="/img/wm-icon.jpg" />
+
+    <link href="/css/bootstrap.css" rel="stylesheet"> 
+    <link href="/css/product-detail.css" rel="stylesheet"> 
+  </head>
+  <body>
+
+    <!-- 页头 -->
+    <div class="header"></div>
+    <!-- 购买区 -->
+    <div class="wm_buyproduct">
+      <!-- 商品标题 -->
+      <div class="ptitle">
+        <!-- 动态加载标题 -->
+          
+      </div>
+        <div class="container">
+            <div class="row">
+                <!-- 商品图片 -->
+                <div class="col-md-5" >
+                    <!-- 轮播 -->
+                    <div class="carousel slide"  data-ride="carousel"  id="wmCarousel">
+                            <!-- 轮播广告内容 -->
+                            <div class="carousel-inner" style="padding-top:20px;">
+                              <!-- 此处应填充为动态数据 -->
+                              
+                            </div>
+                            <!--轮播分页器-->
+                            <ol class="carousel-indicators">
+                              <li data-target="#wmCarousel" data-slide-to="0" class="active"></li>
+                              <li data-target="#wmCarousel" data-slide-to="1"></li>
+                              <li data-target="#wmCarousel" data-slide-to="2"></li>
+                              <li data-target="#wmCarousel" data-slide-to="3"></li>
+                              <li data-target="#wmCarousel" data-slide-to="4"></li>
+                            </ol>
+                    </div>
+                </div>     
+                <!-- 选择购买区 -->
+                <div class="col-md-7" id="buy-area" >
+                 
+                </div>
+            </div>
+            <!-- 配置参数 -->
+            <div class="row">
+              <div class="product-spec" id="product-spec">
+               
+              </div>
+            </div>
+            <!-- 商品详情图 -->
+            <div class="row" id="product-detail-img">
+              
+            </div>
+        </div>
+    </div>
+ 
+
+    <!-- 页尾 -->
+    <div class="footer"></div>
+    
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script>
+      //获取网页？后面的请求参数
+      function GetRequest() {  
+     var url = location.search; //获取url中"?"符后的字串  
+     var theRequest = new Object();  
+          if (url.indexOf("?") != -1) {  
+             var str = url.substr(1);  
+             strs = str.split("&");  
+             for(var i = 0; i < strs.length; i ++) {  
+                theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+              }  
+          }  
+          return theRequest;  
+      }  
+    // 页面加载完成，异步请求服务器端的动态数据
+    $(window).load(function(){
+      //加载页头页尾
+      $('.header').load('../header.html')
+      $('.footer').load('../footer.html')
+      //获取网页？后面的请求参数
+      let pid=1
+      if(GetRequest().pid)
+      pid = GetRequest().pid
+      console.log(pid)
+      
+      //异步提交用户的输入给后台API  
+      $.ajax({
+        method: 'GET',
+        url: 'http://127.0.0.1:5050/product/details?pid='+pid,
+        success:function(data){
+             let details = data.details
+             let family = data.family
+
+             let html_title =`<h4 style="padding-left:100px; color:black;">${family.name}</h4>`       
+             $('.wm_buyproduct .ptitle').html(html_title)
+            //标题栏
+             
+             //动态获取轮播图片
+             let html_carousel = '' //即将要放到轮播广告内的动态内容
+            for(let i in details.picList){
+              html_carousel +=`
+              <div class="item  ${i==0?'active':''}" style="border: 2px solid rgb(102, 102, 102);">
+                <img src="${details.picList[i].lg}">
+              </div>
+              `
+            }
+            $('.carousel .carousel-inner').html(html_carousel)
+
+            //处理商品选择购买区
+            let html_buyarea = `
+            <!-- 主副标题-->
+                  <div class="row">
+                    <div>
+                      <h3 style="font-family:Microsoft Yahei; font-size:2em;font-weight:bold;">${details.title}</h3>
+                      <h4 class="product-subtitle">${details.subtitle}</h4>
+                    </div>
+                  </div>
+                  <!-- 版本 -->
+                  <div class="row">
+                    <h3 style="color:#F96003; font-family:SimHei;">选择版本：</h3>
+                    `
+                    //循环导入该型号的各个版本
+                    for(let i in family.productList){
+                      html_buyarea+=`
+                    <div class="col-md-6">
+                      <a href="/product/details.html?pid=${family.productList[i].pid}" >
+                        <h4 class=" text_spec text-center ${family.productList[i].pid==pid? 'text-active':'' }">${family.productList[i].spec}
+                        </br>${family.productList[i].color}
+                        </h4>
+                      </a>
+                    </div>    `       
+                    }                   
+                  html_buyarea+=
+                  `      
+                  </div>
+                  
+                  <!-- 价格 -->
+                  <div class="row">
+                    <h4 class="text-price">销售价：${details.price}</h4>
+                  </div>
+                  <!-- 购买按钮 -->
+                  <div class="row">
+                      <div style="padding: 30px 0px;">
+                        <div class="col-md-6">
+                          <button class="btn-buy  btn-block" id="btn_buy" onclick="buy()">立刻购买</button>
+                        </div>
+                        <div class="col-md-6">
+                          <button class=" btn-buy btn-block" id="btn_add_cart" onclick="addcart()">加入购物车</button>
+                        </div>
+                      </div>
+                  </div>
+            `               
+            $('#buy-area').html(html_buyarea)  //把动态数据装回静态页面
+
+            //处理商品参数区域
+            html_spec=`
+            <table class="table">
+              <tr>
+                 <td>
+                    商品名称：${details.name} 
+                 </td> 
+                 <td>
+                    商品分类：${details.category} 
+                 </td> 
+                 <td>
+                    商品版本：${details.spec} 
+                 </td> 
+              </tr>
+              <tr>
+                 <td>
+                    操作系统：${details.os} 
+                 </td> 
+                 <td>
+                    商品颜色：${details.color} 
+                 </td> 
+                 <td>
+                    商品内存：${details.memory} 
+                 </td> 
+              </tr>
+              <tr>
+                 <td>
+                    商品尺寸：${details.resolution} 
+                 </td> 
+                 <td >
+                    商品说明：${details.details} 
+                 </td>             
+              </tr>
+            </table>
+            
+            `
+            $('#product-spec').html(html_spec)
+            //处理商品详细图区域
+            let html_product_img=`
+            <div class="col-md-12">
+            <div class="product-detail-img">  `
+            for(let i in details.picList){
+            html_product_img+=`
+             
+            <img src="${details.picList[i].introduce}" alt=""/>
+           `
+          } html_product_img+=`</div></div>
+            `
+            $('#product-detail-img').html(html_product_img)
+            
+            }
+      })
+    })
+
+    addcart=function(){
+       let uid=sessionStorage.getItem('uid')
+      
+       let pid=1
+      if(GetRequest().pid)
+      pid = GetRequest().pid
+      
+        if(!uid)
+        {
+          alert("请先登录")
+          location.href='/signin.html'
+        }else{
+          $.ajax({
+          method : 'GET',
+          url:'http://127.0.0.1:5050/cart/item/add',
+          data: `uid=`+uid+`&pid=`+pid+`&buyCount=1` ,
+          success:function(data){
+            if(data.code==200){
+              alert("已加入购物车")
+            }else{
+              alert("添加失败！msg: "+data.msg)
+            }
+          }
+        })
+        }
+      
+      
+    }
+
+    buy=function(){
+      let uid=sessionStorage.getItem('uid')
+      let pid=1
+      if(GetRequest().pid)
+      pid = GetRequest().pid
+        if(!uid)
+        {
+          alert("请先登录")
+          location.href='/signin.html'
+        }else{
+        window.location.href="/cart/pay.html?pid="+pid
+      }
+    }
+
+    </script>
+    <script src="/js/header.js"></script>
+  </body>
+</html>

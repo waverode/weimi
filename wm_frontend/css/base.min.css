@@ -1,0 +1,325 @@
+.breadcrumbs{
+    height: 40px;
+    font-size: 12px;
+    line-height: 40px;
+    background: #f5f5f5;
+    color: #616161;
+}
+.breadcrumbs .container{
+    width: 1226px;
+    *zoom: 1;
+    margin-right: auto;
+    margin-left: auto;
+}
+.breadcrumbs a{
+    color: #757575;
+}
+.breadcrumbs .sep{
+    margin: 0 0.5em;
+    color: #b0b0b0;
+}
+.user-main{
+    padding-bottom: 40px;
+}
+.page-main{
+    background: #f5f5f5;
+}
+.page-main .container{
+    width: 1226px;
+    *zoom: 1;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.container:after, .container:before {
+    content: " ";
+    display: table;
+}
+.page-main .row{
+    margin-left: -14px;
+    _margin-left: 0;
+    *zoom: 1;
+}
+.page-main .span4{
+    width: 234px;
+}
+.user-address-menu {
+    background: #fff;
+    padding: 36px 0;
+}
+.user-address-menu .menu-box {
+    margin: 0 48px 12px;
+}
+.user-address-menu h3 {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 52px;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+.user-address-menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.user-address-menu li {
+    padding: 6px 0;
+}
+.user-address-menu li a {
+    color: #757575;
+}
+.page-main .span16{
+    width: 978px;
+}
+.mi-uc-box{
+    padding: 36px 48px;
+    background: #fff;
+}
+.portal-content-box .portal-main[data-v-1] {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+.clearfix:after, .clearfix:before {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+.portal-content-box .user-card[data-v-1] {
+    position: relative;
+    float: left;
+    width: 302px;
+    height: 160px;
+    padding-left: 180px;
+    padding-top: 40px;
+}
+.portal-content-box .user-card .username[data-v-1] {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 400;
+    color: #616161;
+}
+.portal-content-box .user-card .tip[data-v-1] {
+    margin: 0 0 10px;
+    color: #b0b0b0;
+}
+.portal-content-box .user-card .link[data-v-1] {
+    font-size: 12px;
+    color: #ff6700;
+}
+.portal-content-box .user-card .avatar[data-v-1] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 4px;
+    border: 1px solid #e0e0e0;
+    border-radius: 150px;
+}
+.portal-content-box .user-actions[data-v-1] {
+    float: right;
+    width: 358px;
+    margin-top: 35px;
+}
+.portal-content-box .user-actions .action-list[data-v-1] {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    color: #757575;
+}
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+.leftmenu-text{
+    text-align: center;
+}
+.portal-content-box .user-actions .action-list li[data-v-1] {
+    position: relative;
+    padding: 6px 0;
+}
+.portal-content-box .user-actions .action-list .level-2[data-v-1] {
+    color: #ffac13;
+}
+.portal-sub[data-v-2] {
+    border-top: 1px solid #e0e0e0;
+}
+.portal-sub .info-list[data-v-2] {
+    margin: 0;
+    padding: 60px 0 0;
+    list-style-type: none;
+    color: #757575;
+}
+.portal-sub .info-list li[data-v-2] {
+    position: relative;
+    float: left;
+    width: 276px;
+    height: 65px;
+    padding-left: 112px;
+    padding-top: 15px;
+    margin-left: 14px;
+    margin-bottom: 80px;
+    box-sizing: content-box;
+}
+.portal-sub .info-list h3[data-v-2] {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 400;
+}
+.portal-sub .info-list .num[data-v-2] {
+    color: #ff6700;
+}
+.portal-sub .info-list .iconfont[data-v-2] {
+    font-size: 16px;
+    line-height: 16px;
+    vertical-align: -1px;
+}
+[class*=iconfont] {
+    font-family: iconfont!important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: .2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+.portal-sub .info-list img[data-v-2] {
+    position: absolute;
+    left: -10px;
+    top: -10px;
+}
+img {
+    border: 0;
+}
+.span1, .span2, .span3, .span4, .span5, .span6, .span7, .span8, .span9, .span10, .span11, .span12, .span13, .span14, .span15, .span16, .span17, .span18, .span19, .span20 {
+    float: left;
+    margin-left: 14px;
+    min-height: 1px;
+}
+.mi-uc-box .box-hd .more {
+    border-bottom: 1px solid #e0e0e0;
+}
+.err_tip{
+    margin-bottom: 5px;
+    line-height: 20px;
+    font-size: 14px;
+}
+.space{
+    margin-bottom: 6px;
+}
+.news-area{
+    padding-top: 10px;
+}
+.news-time{
+    text-align: center;
+    padding-bottom: 10px;
+}
+.news-detail-area{
+    background-color: #f5f5f5;
+}
+.news-title{
+    font-size: large;
+    font-weight: 900;
+    padding-top: 20px;
+    padding-bottom: 25px;
+    padding-left: 30px;
+}
+.news-content{
+    position: relative;
+    padding-left: 120px;
+    padding-top: 15px;
+    padding-bottom: 45px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+    box-sizing: content-box;
+}
+.news-image{
+    position: absolute;
+    border: 0;
+    left: -10px;
+    top: -10px;
+}
+.address-content{
+    background-color: #f5f5f5;
+    padding: 15px;
+    margin: 10px;
+}
+.receiver{
+    float: left;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+.address-phone{
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+.address-area{
+    float: left;
+    padding-right: 40px;
+}
+.address-delete{
+    float: right;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-radius: 12px;
+    color: #757575;
+    font-size: 16px;
+}
+.btaddAddress{
+    padding-bottom: 10px;
+    margin: 10px;
+    background-color:#ff6700;
+    float: right;
+    color: #fff;
+    font-weight: 600;
+}
+.iconfont{
+    font-family: "iconfont" !important;
+    font-style: normal;
+}
+
+.uc-box{
+    padding: 36px 0px;
+    background: #fff;
+}
+.uc-content-box{
+    padding: 0px 48px;
+}
+.uc-content-box .box-bd .empty {
+    margin: 40px 0;
+    font-size: 18px;
+    text-align: center;
+    color: #b0b0b0;
+}
+.table-header{
+    margin: 20px 0;
+}
+
+.order-header{
+    background-color: #fffaf7;
+}
+
+.order-product{
+    margin-bottom: 40px 0;
+}
+
+.order-box{
+    border: 1px solid #ffac13;
+}
+
+li{
+    list-style-type: none;
+}
+
+#total-price{
+    color: red;
+}

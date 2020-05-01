@@ -1,0 +1,62 @@
+/* div{
+    border:1px solid #000;
+} */
+
+
+
+.good-list{
+    padding: 0px 50px;
+}
+
+.good-item{
+    background-color: #ffffff;
+    transition: all .5s;    
+}
+
+.good-item:hover{
+    transform: scale(1.01);
+    box-shadow:10px 10px 20px 10px rgba(102, 102, 101, 0.5), -10px 10px 10px 10px rgba(255,255,255,0.5) ;
+    ; 
+}
+
+.good-img{
+    width: 100%;
+    padding: 0px 40px;
+}
+
+.good-price{
+    font-size:1.5em;
+    color: #F96003;
+    
+}
+
+/* .col-md-3{
+    padding:10px ;
+    
+} */
+
+.order-box{
+    padding: 2%;
+}
+
+.sort-box ul{
+    list-style: none;
+}
+.sort-box li{
+    display: inline;
+    padding: 10px;
+}
+.sort-box li span{
+    padding: 10px;
+  
+}
+
+.sort-box a{
+    text-decoration: none;
+}
+
+.sort-box a:hover{
+    text-decoration: none;
+    color: #F95003;
+}
+

@@ -1,0 +1,276 @@
+/* div{
+    border: 1px solid #aaa;
+} */
+.wm-cart-header{
+    background: #ffff;
+    border-bottom: 3px solid #ff6700;
+}
+.header-logo{
+    margin: 30px 0 20px 40px;
+    /* padding-top: 9px; */
+    text-align: right;
+}
+.header-title{
+    margin: 40px 0 20px;
+    padding-bottom: 9px;
+}
+.subtitle{
+    font-size: 42%;
+}
+.header-info{
+    margin: 40px 0 20px;
+}
+@media screen and (max-width: 768px) {  /* 针对手机调整页头 */
+    .header-title{
+        text-align: center;
+    }
+    .subtitle{
+        font-size: 0%;
+    }
+}
+/* ********************************** */
+/* 购物车主体 */
+.wm-cart-main{
+    padding-top: 38px;
+    padding-bottom: 38px;
+}
+/* 空购物车 */
+.cart-empty{
+    margin: 65px 0 130px;
+    color: #b0b0b0;
+    /* overflow: hidden; */
+}
+.empty-img{
+    text-align: right;
+    padding-right: 48px;
+}
+.empty-info{
+    margin: 70px 0 40px;
+}
+.empty-info h2{
+    font-size: 36px;
+    font-weight: bolder;
+}
+.empty-info .btn{
+    /* height: 48px; */
+    width: 170px;
+    line-height: 48px;
+    font-size: 15px;
+    font-weight: 900;
+    background: #ff6700;
+    border-color: #ff6700;
+    text-align: center;
+    color: #fff;
+    display: inline-block;
+    margin: 12px 0 10px;
+    padding: 0;
+}
+.empty-info .btn:hover{
+    background: #e75d00;
+    transition: color .3s;
+}
+@media screen and (max-width: 992px) {   /* 针对平板以下屏幕调整空购物车页 */
+    .empty-img, .empty-info{
+        text-align: center;
+    }
+}
+/* 商品列购物车 */
+.cart-goods-list{
+    background: #fff;
+    /* font-size: 14px; */
+}
+.cart-goods-list .list-header{
+    height: 70px;
+    line-height: 70px;
+    /* padding-right: 26px; */
+    color: #424242;
+}
+/* checkbox勾选框 */
+.checkbox-custom{
+    padding: 0;
+    text-align: right;
+}
+.checkbox-custom input[type="checkbox"]{
+    opacity: 0;  /* 将初始的checkbox隐藏起来 */
+    margin-right: 15px;
+}
+/* 新建的checkbox样式 */
+.checkbox-custom label::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 27%;     /*checkbox位置*/
+    margin-top: -9px;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    border-radius: 0px;
+    border: 1px solid #cccccc
+}
+.checkbox-custom input[type="checkbox"]:checked +label::after{
+    position: absolute;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    content: "\e013";
+    text-align: center;
+    padding-top: 2%;
+    top: 49%;
+    left: 27%;     /* checkbox位置 */ 
+    margin-top: -9px;
+    font-size: 11px;
+    line-height: 1;
+    width: 19px;
+    height: 19px;
+    color: #ffffff;
+    border: 1px solid #ff6700;
+    background: #ff6700;
+}
+.checkbox-custom label{
+    cursor: pointer;
+    line-height: 1.2;
+    font-weight: normal;
+    margin-bottom: 0;
+    padding-left: 10%;
+    padding-right: 13%;
+    text-align: right;
+}
+.col-price, .col-num, .col-total, .col-action{
+    text-align: center;
+}
+.list-body .item-box{
+    height: 110;
+    line-height: 110px;
+    border-top: 1px solid #cccccc;
+}
+
+.input-group{
+    line-height: normal;
+    margin: 38px 0 38px;
+}
+.input-group .count{
+    border:1px solid #ccc;
+    text-align: center;
+    font-size:15px;
+}
+.del-cart{
+    text-align: center;
+}
+.del-cart .del{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-radius: 12px;
+    color: #757575;
+    font-size: 16px;
+}
+.del-cart .del:hover{
+    color: #fff;
+    background-color: #e53935;
+}
+.iconfont{
+    font-family: "iconfont" !important;
+    font-style: normal;
+}
+.cell-name{
+    text-align: left;
+    /* font-size: 19px; */
+}
+.cell-price{
+    text-align: center;
+}
+.cell-price h4{
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 110px;
+    margin: 0;
+}
+.cell-totalpay{
+    color: #ff6700;
+    font-size: 16px;
+    text-align: center;
+}
+/* 工具条 */
+.cart-bar{
+    height: 60px;
+    line-height: 60px;
+    margin: 20px 0 20px;
+    background-color: #fff;
+}
+.cont-shopping{
+    line-height: 60px;
+    padding-left: 23px;
+    text-align: center;
+}
+.cont-shopping a{
+    transition: color .3s;
+}
+.cont-shopping a:hover{
+    color: #ff6700;
+}
+.total-info{
+    line-height: 60px;
+    padding-left: 22px;
+    border-left: 1px solid #eee;
+}
+.total-price{
+    color: #ff6700;
+    text-align: right;
+    line-height: 60px;
+}
+.total-price span em{
+    font-size: 31px;
+    font-style: normal;
+}
+.btn-pay{
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+.btn-pay .btn{
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    background: #ff6700;
+    border: 1px solid #ff6700;
+    color: #fff;
+}
+.btn-pay .btn:hover{
+    background: #f16100;
+    border-color: 1px solid #f16100;
+}
+/* 未选中商品，结算按钮禁用 */
+.btn-pay .btn-pay-disabled{
+    background: #e0e0e0 !important;
+    border-color: #e0e0e0 !important;
+    color: #b0b0b0 !important;
+}
+.goods-name{
+    line-height: inherit;
+    margin: 0;
+    overflow: hidden;           /* 属性规定内容溢出元素框时的处理。hidden表示溢出内容会被修剪，且剪掉部分不可见 */
+    white-space: nowrap;        /* 属性规定如何处理元素内的空白。nowrap规定文本不能换行，在同一行继续直至遇到<br> */
+    text-overflow: ellipsis;    /* 属性规定文本溢出包含元素时的处理。ellipsis表示省略号代替修建部分，clip表示直接修剪 */
+}
+.goods-name a:hover{
+    color: #4b4b4b;
+    transition: color .3s;
+}
+@media screen and (max-width: 992px) {  /* 调整平板以下屏幕的购物车商品名列的样式 */
+    .goods-name{
+        line-height: normal;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}
+/* 调整平板屏以下的屏幕在购物车列的隐藏项 */
+.cartlist-hidden{
+    line-height: normal;
+}
+.cartlist-hidden .col-xs-6 .input-group{
+    margin: 0;
+}
+.cartlist-hidden .col-xs-6 h4{
+    font-size: 17px;
+}

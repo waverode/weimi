@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>商品列表</title>
+    <!-- Bootstrap -->
+    <link rel="shortcut icon" type="image/icon" href="/img/wm-icon.jpg" />
+
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/alist.css">
+  </head>
+  <body>
+    <!-- 页头 -->
+    <div class="header"><h1>这是页头</h1></div>
+    <!-- 主体 -->
+    <div class="container">
+        <!-- 筛选框 -->
+        <div class="order-box">
+            <div class="row">
+                <div class="col-md-4"> 
+                    <div class="sort-box">
+                        <ul>
+                            <li>
+                                 <a href="javascript:void(0)" id='sort_common'  onclick="sort_common();">
+                                    综合
+                                </a>
+                                <span style="color: bisque;">|</span>
+                            </li>
+                            <li>
+                                 <a href="javascript:void(1)" id='sort_time' onclick="sort_time();">
+                                    新品
+                                </a>
+                                <span style="color: bisque;">|</span>
+                            </li>
+                            <li>
+                                 <a href="javascript:void(2)" id='sort_price' onclick="sort_price();">
+                                    价格
+                                </a>
+                                <span style="color: bisque;">|</span>
+                            </li>
+                        </ul>
+                    </div>                
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="sort-box">
+                        <ul>
+                            <li>
+                                 <a >
+                                     <span class=" glyphicon glyphicon glyphicon-unchecked"></span>促销
+                                </a>
+                                <span style="color: bisque;">|</span>
+                            </li>
+                            <li>
+                                <a >
+                                    <span class=" glyphicon glyphicon glyphicon-unchecked"></span>分期
+                               </a>
+                               <span style="color: bisque;">|</span>
+                           </li>
+                           <li>
+                            <a >
+                                <span class=" glyphicon glyphicon glyphicon-unchecked"></span>仅看有货
+                           </a>
+                           <span style="color: bisque;">|</span>
+                       </li>
+                        </ul>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        <!-- 商品列表 -->
+        <div class="good-list" >
+            <!-- 动态装入数据 -->
+        </div>
+    </div>
+    <!-- 页尾 -->
+    <div class="footer"><h1>这是页尾</h1></div>
+    
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script>
+    //获取网页？后面的请求参数
+    function GetRequest() {  
+     var url = location.search; //获取url中"?"符后的字串  
+     var theRequest = new Object();  
+          if (url.indexOf("?") != -1) {  
+             var str = url.substr(1);  
+             strs = str.split("&");  
+             for(var i = 0; i < strs.length; i ++) {  
+                theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+              }  
+          }  
+          return theRequest;  
+      }  
+    $(window).load(function(){
+        //加载页头页尾
+        $('.header').load('/../header.html')
+        $('.footer').load('/../footer.html')
+        //获取网页地址请求参数
+        let pno  =0
+        let pageSize =0
+        let category='phone'
+        if(GetRequest().pno)
+            pno = GetRequest().pno
+        else
+             pno  = 1
+        if(GetRequest().pageSize)
+             pageSize = GetRequest().pageSize
+        else
+             pageSize = 9
+        if(GetRequest().category)
+             category = GetRequest().category
+        console.log(category)
+
+        //发出请求，动态获取后台API返回的数据
+        $.ajax({
+            method: 'GET',
+            url: 'http://127.0.0.1:5050/product/list?pno='+pno+'&pageSize='+pageSize+'&category='+category,  
+            success:function(data){
+                //即将装入的html语句，动态加入商品列表中的数据
+                console.log(data)
+                html=`
+                <div class="row">`
+                for(let i in data.data)
+                {html+=
+                `
+                <div class="col-xs-6 col-md-3">
+                    <div class="good-item">
+                        <div class="img">
+                            <a href="/product/details.html?pid=${data.data[i].pid}">
+                            <img src="${data.picList[i].md}" class="good-img" alt="">
+                            </a>
+                        </div>
+                        <h4 class=" text-center">${data.data[i].name}</h4>
+                        <p class=" text-center good-price">${data.data[i].price}</p>
+                        <div class="good-flag"></div>
+                    </div>  
+                </div>
+            `
+                }
+            html+=    
+            `    
+            </div>
+                `
+                $('.good-list').html(html)
+            }
+        })
+
+        })
+//排序选框
+        //默认排序
+        sort_common=function(){
+            // //改超链接颜色
+            // let sort_common_a = document.getElementById("sort_common");
+            //  sort_common_a.style.color= "#F95003";
+            let category='phone'
+            if(GetRequest().category)
+             category = GetRequest().category
+            $.ajax({
+                method:'GET',
+                url:'http://127.0.0.1:5050/product/list',
+                data:`pno=1&pageSize=9&category=`+category+`&sortflag=1`,
+                success:function(data){
+                //即将装入的html语句，动态加入商品列表中的数据
+                console.log(data)
+                html=`
+                <div class="row">`
+                for(let i in data.data)
+                {html+=
+                `
+                <div class="col-md-3">
+                    <div class="good-item">
+                        <div class="img">
+                            <a href="/product/details.html?pid=${data.data[i].pid}">
+                            <img src="${data.picList[i].md}" class="good-img" alt="">
+                            </a>
+                        </div>
+                        <h4 class=" text-center">${data.data[i].name}</h4>
+                        <p class=" text-center good-price">${data.data[i].price}</p>
+                        <div class="good-flag"></div>
+                    </div>  
+                </div>
+            `
+                }
+            html+=    
+            `    
+            </div>
+                `
+                $('.good-list').html(html)
+                }
+            })
+        }
+            //价格排序
+        sort_price=function(){
+            let category='phone'
+            if(GetRequest().category)
+             category = GetRequest().category
+            $.ajax({
+                method:'GET',
+                url:'http://127.0.0.1:5050/product/list',
+                data:`pno=1&pageSize=9&category=`+category+`&sortflag=2`,
+                success:function(data){
+                //即将装入的html语句，动态加入商品列表中的数据
+                console.log(data)
+                html=`
+                <div class="row">`
+                for(let i in data.data)
+                {html+=
+                `
+                <div class="col-md-3">
+                    <div class="good-item">
+                        <div class="img">
+                            <a href="/product/details.html?pid=${data.data[i].pid}">
+                            <img src="${data.picList[i].md}" class="good-img" alt="">
+                            </a>
+                        </div>
+                        <h4 class=" text-center">${data.data[i].name}</h4>
+                        <p class=" text-center good-price">${data.data[i].price}</p>
+                        <div class="good-flag"></div>
+                    </div>  
+                </div>
+            `
+                }
+            html+=    
+            `    
+            </div>
+                `
+                $('.good-list').html(html)
+                }
+            })
+        }
+            //新品排序
+        sort_time=function(){
+            let category='phone'
+            if(GetRequest().category)
+             category = GetRequest().category
+            $.ajax({
+                method:'GET',
+                url:'http://127.0.0.1:5050/product/list',
+                data:`?pno=1&pageSize=9&category=`+category+`&sortflag=3`,
+                success:function(data){
+                //即将装入的html语句，动态加入商品列表中的数据
+                console.log(data)
+                html=`
+                <div class="row">`
+                for(let i in data.data)
+                {html+=
+                `
+                <div class="col-md-3">
+                    <div class="good-item">
+                        <div class="img">
+                            <a href="/product/details.html?pid=${data.data[i].pid}">
+                            <img src="${data.picList[i].md}" class="good-img" alt="">
+                            </a>
+                        </div>
+                        <h4 class=" text-center">${data.data[i].name}</h4>
+                        <p class=" text-center good-price">${data.data[i].price}</p>
+                        <div class="good-flag"></div>
+                    </div>  
+                </div>
+            `
+                }
+            html+=    
+            `    
+            </div>
+                `
+                $('.good-list').html(html)
+                }
+            })
+        }
+     
+    </script>
+    <script src="/js/header.js"></script>
+  </body>
+</html>

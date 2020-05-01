@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>微米商城购物车</title>
+
+    <!-- Bootstrap -->
+    <link rel="shortcut icon" type="image/icon" href="/img/wm-icon.jpg" />
+
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/scaffolding.css">
+
+    <link rel="stylesheet" href="/css/cart.css">
+</head>
+<body>
+    <!-- 页头 -->
+    <div class="wm-cart-header">
+        <div class="container-fluid">
+            <!-- <div class="row clearfix">
+                <div class="col-md-12 column"> -->
+                    <div class="row clearfix">
+                        <div class="col-md-2 hidden-xs hidden-sm column">
+                            <div class="header-logo">
+                                <a href="#" class="logo " title="微米官网"><img src="/img/wm-icon.jpg" style="width: 40%; height: 40%;"  alt="微米官网"></a>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-7 column">
+                            <div class="header-title">
+                                <h2>我的购物车<small class="subtitle"> &nbsp;&nbsp;温馨提示：产品是否购买成功，以最终下单为准，请尽快结算，mua~</small></h2>
+                            </div>
+                        </div>
+                        <div class="col-md-3 hidden-xs hidden-sm column">
+                            <div class="header-info">
+                                <a href="#" class="navbar-text navbar-link navbar-left"><span id="js_user"></span>,欢迎</a>
+                                <span class="navbar-text navbar-left">|</span>
+                                <a href="#" class="navbar-text navbar-link navbar-left">用户中心</a>    
+                            </div>
+                        </div>
+                    </div>
+                <!-- </div>
+            </div> -->
+        </div>
+    </div>
+    <div class="container">
+        <div class="wm-cart-main" id="maincartlist">
+            <!-- 商品购物车列表 -->
+            <div id="cartmain">      <!-- hide类，没有商品时隐藏-->
+                <div class="cart-goods-list">
+                    <!-- 表头 -->
+                    <div class="row">
+                        <div class="col-md-12 hidden-xs hidden-sm">
+                            <div class="list-header">
+                                <div class="row">
+                                    <div class="col-md-1 checkbox-custom">
+                                        <input type="checkbox" id="checkall">
+                                        <label for="checkall">全选</label>
+                                    </div>
+                                    <div class="col-md-1">&nbsp;</div>
+                                    <div class="col-md-4">商品名称</div>
+                                    <div class="col-md-1 col-price">单价</div>
+                                    <div class="col-md-2 col-num">数量</div>
+                                    <div class="col-md-2 col-total">合计</div>
+                                    <div class="col-md-1 col-action">操作</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 商品列表 -->
+                    <div class="list-body" id="goodslist">
+                        
+                    </div>
+                </div>
+                <!-- 工具条：结算 -->
+                <div class="cart-bar">
+                    <div class="row clearfix">
+                        <div class="col-md-1 hidden-xs hidden-sm column cont-shopping">
+                            <a href="#">继续购物</a>
+                        </div>
+                        <div class="col-xs-5 col-md-5 column">
+                            <span class="total-info">共<i id="countall"></i>件商品，已选择<i id="select"></i></span>
+                        </div>
+                        <div class="col-xs-4 col-md-3 column total-price">
+                            <span>合计：<em id="totalprice">0.00</em>元</span>
+                        </div>
+                        <div class="col-xs-3 col-md-3 column">
+                            <div class="btn-pay">
+                                <a href="pay.html">
+                                    <button type="button" id="settlement" class="btn btn-block btn-lg">去结算</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 模态框：登录提醒 -->
+    <div class="modal fade" id="checklogin" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">获取购物车失败</h4>
+                </div>
+                <div class="modal-body">
+                    <h2 style="text-align: center;">请登录&hellip;</h2>
+                </div>
+                <div class="modal-footer">
+                    <a href="#"><button type="button" class="btn btn-primary">Login</button></a>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/cart.js"></script>
+</body>
+</html>
